@@ -2,7 +2,7 @@ Inception
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-本 repository 包含名為 `inception` 的 Codex skill，這是一個受到 StoryScope 啟發而開發的工具。
+本 repository 包含名為 `inception` 的 skill，已同時包裝成可供 OpenAI Codex 與 Anthropic Claude Code 原生安裝的 plugin。這是一個受到 StoryScope 啟發而開發的工具。
 
 StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)）在 AI fiction 的研究中觀察到，AI 生成故事可能較常採用整齊、單一路徑的情節並過度解釋主題。這個 skill 將這類 population-level observation 作為提出 audit hypotheses 的參考；它不是對所有內容的普遍寫作規則，也不代表 presentation text 或 document text 已有相同程度的研究證據。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
@@ -58,11 +58,44 @@ skills/inception/
 
 較詳細的 domain-specific guidance 則保留在 `references/` 中，避免與目前任務無關的 domain 文件佔用 context。
 
-## Make the Skill Discoverable
+## 安裝與探索 Skill
 
-repository 是這個 skill 的 source of truth。
+repository 是這個 skill 的 single source of truth。Codex 與 Claude Code 的 package 都會載入同一份 `skills/inception/SKILL.md`；兩者不會各自複製另一份 skill implementation。
 
-若要讓它成為個人 Codex skill，可以將 skill folder 複製或連結到 `~/.codex/skills/`：
+整合用的 metadata 保留在 repository 根目錄：Codex 使用 `.codex-plugin/plugin.json` 與 `.agents/plugins/marketplace.json`，Claude Code 使用 `.claude-plugin/plugin.json` 與 `.claude-plugin/marketplace.json`。
+
+### OpenAI Codex
+
+先加入 repository marketplace，再安裝 plugin：
+
+```bash
+codex plugin marketplace add arthur422tp/Inception
+codex plugin add inception@inception
+```
+
+安裝後可以使用 `$inception` 明確呼叫，也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction、presentation text 或 document text。
+
+### Anthropic Claude Code
+
+先加入 repository marketplace，再安裝 plugin：
+
+```bash
+claude plugin marketplace add arthur422tp/Inception
+claude plugin install inception@inception
+```
+
+在互動式 Claude Code session 中，也可以使用以下等價指令：
+
+```text
+/plugin marketplace add arthur422tp/Inception
+/plugin install inception@inception
+```
+
+安裝後，skill 會以 plugin namespace `/inception:inception` 提供。若要在本地開發，可以直接使用 `claude --plugin-dir .` 載入目前 repository。
+
+### 手動 Codex skill 開發
+
+若是本地開發，或使用尚未支援 plugin marketplace 的舊版 Codex，可以將 skill folder 複製或連結到 `~/.codex/skills/`：
 
 ```bash
 cp -R skills/inception ~/.codex/skills/
@@ -80,7 +113,6 @@ ln -s "$(pwd)/skills/inception" ~/.codex/skills/inception
 $inception
 ```
 
-也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction、presentation text 或 document text。
 
 ## Validate a Decision Ledger
 

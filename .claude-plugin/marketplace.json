@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "inception",
+  "version": "0.1.0",
+  "description": "Intent-preserving audit and revision for fiction, presentation text, and document text.",
+  "owner": {
+    "name": "arthur422tp",
+    "url": "https://github.com/arthur422tp"
+  },
+  "plugins": [
+    {
+      "name": "inception",
+      "displayName": "Inception",
+      "source": {
+        "source": "github",
+        "repo": "arthur422tp/Inception"
+      },
+      "description": "Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
+      "version": "0.1.0",
+      "author": {
+        "name": "arthur422tp",
+        "url": "https://github.com/arthur422tp"
+      },
+      "homepage": "https://github.com/arthur422tp/Inception",
+      "repository": "https://github.com/arthur422tp/Inception",
+      "category": "productivity"
+    }
+  ]
+}

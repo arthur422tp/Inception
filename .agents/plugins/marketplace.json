@@ -1,0 +1,20 @@
+{
+  "name": "inception",
+  "interface": {
+    "displayName": "Inception"
+  },
+  "plugins": [
+    {
+      "name": "inception",
+      "source": {
+        "source": "local",
+        "path": "."
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Writing"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-This repository contains the `inception` Codex skill, inspired by StoryScope's (📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
+This repository contains the `inception` skill, packaged for both OpenAI Codex and Anthropic Claude Code. It is inspired by StoryScope's (📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
 
 The first release supports:
 
@@ -52,9 +52,44 @@ skills/inception/
 
 `SKILL.md` loads the Core workflow and exactly one domain adapter. Detailed guidance remains in references so unrelated domains do not consume context.
 
-## Make the Skill Discoverable
+## Install and Discover the Skill
 
-The repository is the source of truth. To make the skill available as a personal Codex skill, copy or link the skill folder into `~/.codex/skills/`:
+The repository is the single source of truth. The Codex and Claude Code packages both load the same `skills/inception/SKILL.md`; neither package contains a duplicate skill implementation.
+
+The integration metadata is kept at the repository root: `.codex-plugin/plugin.json` and `.agents/plugins/marketplace.json` for Codex, plus `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` for Claude Code.
+
+### OpenAI Codex
+
+Add the repository marketplace and install the plugin:
+
+```bash
+codex plugin marketplace add arthur422tp/Inception
+codex plugin add inception@inception
+```
+
+Then invoke the skill with `$inception`, or ask Codex to audit or revise fiction, presentation text, or document text against your intent.
+
+### Anthropic Claude Code
+
+Add the repository marketplace and install the plugin:
+
+```bash
+claude plugin marketplace add arthur422tp/Inception
+claude plugin install inception@inception
+```
+
+Inside an interactive Claude Code session, the equivalent commands are:
+
+```text
+/plugin marketplace add arthur422tp/Inception
+/plugin install inception@inception
+```
+
+The skill is available under the plugin namespace as `/inception:inception`. For local development, load the repository directly with `claude --plugin-dir .`.
+
+### Manual Codex skill development
+
+For local development or older Codex setups that do not support plugin marketplaces, copy or link the skill folder into `~/.codex/skills/`:
 
 ```bash
 cp -R skills/inception ~/.codex/skills/
@@ -66,7 +101,7 @@ Or, while developing locally:
 ln -s "$(pwd)/skills/inception" ~/.codex/skills/inception
 ```
 
-After installation, invoke it explicitly with `$inception`, or ask Codex to audit or revise fiction, presentation text, or document text against your intent.
+After installation, invoke it explicitly with `$inception`.
 
 ## Validate a Decision Ledger
 
