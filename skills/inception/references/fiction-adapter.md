@@ -6,6 +6,7 @@
 - Candidate recipe
 - Diagnostic axes
 - Cross-scene audit
+- Revision priorities
 - Recommendation calibration
 
 ## Scope and Evidence
@@ -24,6 +25,8 @@ Observed choice → draft evidence → suspected default → intent relationship
 ```
 
 Include a plausible reason to keep the current choice. If the only argument for change is that a choice is common, do not create an entry.
+
+Apply Inception's baseline meta-intent through observable narrative decisions without asking the user to restate it. Do not infer authorship. Do not treat genre conventions, linear chronology, closure, explicit emotion, or familiar imagery as defects by themselves.
 
 ## Diagnostic Axes
 
@@ -117,6 +120,18 @@ After local candidates are found, check:
 - whether a proposed unusual alternative violates genre, audience, length, or desired-effect constraints.
 
 Merge duplicates into the highest useful scope. Record dependencies before human review.
+
+## Revision Priorities
+
+For every accepted revision, use this default priority order unless the fiction Intent Contract requires a different trade-off:
+
+1. Preserve genre promises, plot facts, established point of view, character relationships, setup and payoff, and the required emotional effect.
+2. Address upstream choices such as over-explained themes, tidy closure that exceeds the intended resolution, single-track causality, or repeated scene functions before changing prose texture.
+3. Consolidate bodily cues, sensory details, imagery, or metaphor families only when repeated instances perform the same narrative or emotional work.
+4. Keep familiar structure when it serves the audience or genre; do not force ambiguity, subplots, moral complexity, nonlinear chronology, or unusual imagery merely to appear less model-default.
+5. Re-check continuity, causality, character agency, setup, payoff, and the Intent Contract after revision.
+
+Do not substitute synonyms, deliberately roughen prose, force informality, or invent autobiographical texture or personal voice as a proxy for narrative revision.
 
 ## Recommendation Calibration
 

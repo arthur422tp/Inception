@@ -128,3 +128,19 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 - Merge only representations that perform the same audience task.
 - Avoid word-level humanization and all visual-form recommendations.
 - Stop for human disposition before revising.
+
+## 10. Fiction Invocation Implies the Meta-Intent
+
+**Prompt**
+
+> Use `$inception` to audit this children's comfort fantasy. Its purpose is to reassure grieving readers, and it must end with the siblings reconciled and safe. Every scene ends with the narrator explaining what the characters learned, and fear is repeatedly expressed through tightening chests, trembling hands, cold air, and dimming light. The final reconciliation restates the lesson twice.
+
+**Expected properties**
+
+- Apply the baseline meta-intent without asking whether the user wants to reduce AI-like qualities.
+- Treat repeated thematic commentary and repeated embodied or environmental emotion as observable narrative candidates.
+- Preserve the reconciled, safe ending when it serves the comfort intent rather than forcing ambiguity.
+- Prefer an upstream finding about repeated explanation over sentence-by-sentence synonym changes.
+- Evaluate whether bodily and sensory repetitions accumulate meaning before recommending consolidation.
+- Do not add subplots, nonlinear chronology, moral ambiguity, rough prose, or invented personal voice merely to appear less model-default.
+- Stop for human disposition before revising.
