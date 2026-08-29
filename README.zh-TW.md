@@ -1,15 +1,15 @@
-# Inception
+Inception
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
 本 repository 包含名為 `inception` 的 Codex skill，這是一個受到 StoryScope 啟發而開發的工具。
 
-StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)） 的核心觀察之一是：模型在生成內容時，經常會收斂到熟悉、常見或高機率的內容選擇。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
+StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)）在 AI fiction 的研究中觀察到，AI 生成故事可能較常採用整齊、單一路徑的情節並過度解釋主題。這個 skill 將這類 population-level observation 作為提出 audit hypotheses 的參考；它不是對所有內容的普遍寫作規則，也不代表 presentation text 已有相同程度的研究證據。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
 第一個版本支援：
 
-* fiction（小說／虛構敘事）；
-* presentation text（簡報文字內容），包含整份簡報的論證架構、單張投影片的功能、claims 與 evidence。
+- fiction（小說／虛構敘事）；
+- presentation text（簡報文字內容），包含整份簡報的論證架構、單張投影片的功能、claims 與 evidence。
 
 目前刻意排除簡報的視覺設計，例如 typography、color、spacing、layout、icons 與 slide masters。
 
@@ -120,9 +120,9 @@ prompt 與 adapter 文件採用 structural validation，加上位於 `tests/skil
 
 本專案目前不以以下事項為目標：
 
-* AI source detection 或 authorship scoring；
-* 使用 word blacklist 或其他 cosmetic humanization 手段；
-* 在人類完成 disposition 之前自動改寫內容；
-* 將 StoryScope 所觀察到的 population-level tendencies 視為適用於所有文本的普遍寫作規則；
-* 簡報的 visual presentation design；
-* 第一個版本中的 research writing 或其他 domain adapters。
+- AI source detection 或 authorship scoring；
+- 使用 word blacklist 或其他 cosmetic humanization 手段；
+- 在人類完成 disposition 之前自動改寫內容；
+- 將 StoryScope 所觀察到的 population-level tendencies 視為適用於所有文本的普遍寫作規則；
+- 簡報的 visual presentation design；
+- 第一個版本中的 research writing 或其他 domain adapters。
