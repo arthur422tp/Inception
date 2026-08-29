@@ -100,7 +100,6 @@ python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_valida
   skills/inception
 ```
 
-The prompt and adapter documents use structural validation plus representative smoke scenarios in `tests/skill-smoke/scenarios.md`; they intentionally do not use RED/GREEN prompt TDD.
 
 ## Non-Goals
 
