@@ -2,42 +2,40 @@
 
 ## Contents
 
-- Scope
-- Deck-level audit
-- Slide semantic record
-- Slide-level audit
-- Content-level audit
-- Heading functions
+- Scope and evidence
+- Candidate recipe
+- Semantic levels and slide records
+- Diagnostic axes
+- Cross-slide audit
 - Recommendation calibration
 - Excluded visual concerns
 
-## Scope
+## Scope and Evidence
 
-Audit what the presentation says, why it says it, and in what rhetorical order. Treat titles as content. Do not evaluate or recommend visual design.
+Audit rhetorical decisions, not presentation quality in the abstract. Use StoryScope's population-level tendencies as a method for forming presentation-specific hypotheses for inspection; these transfer hypotheses are not findings about presentations, thresholds, prohibitions, or proof of AI authorship.
+
+Audit what the presentation says, why it says it, and in what rhetorical order. Treat titles as content. Evaluate choices at deck, section, slide, and passage scope. Cite the smallest useful evidence, then check its prerequisites and downstream consequences when necessary.
+
+## Candidate Recipe
+
+Build every ledger candidate in this order:
+
+```text
+Observed rhetorical choice -> slide/deck evidence -> suspected default
+-> intent relationship -> keep/revise alternative -> trade-off -> recommendation
+```
+
+Include a plausible reason to keep the current choice. If the only argument for change is that a structure or phrase is common, do not create an entry. Prefer one upstream deck- or slide-role entry over many sentence-level duplicates.
+
+## Semantic Levels and Slide Records
 
 Use three semantic levels:
 
 ```text
-Deck argument → Slide function → Information-bearing content
+Deck argument -> Slide function -> Information-bearing content
 ```
 
-## Deck-Level Audit
-
-Map the presentation as a sequence of claims and dependencies. For each section, ask:
-
-- What must the audience believe or understand after this section?
-- Why does this section exist for this audience and goal?
-- Does its position establish context, mechanism, evidence, implication, or transition at the needed moment?
-- Does evidence arrive where the claim needs it?
-- Do two sections perform the same rhetorical work?
-- Does the conclusion add synthesis or only repeat prior bullets?
-- Is an agenda, background, solution, benefits, or future-work section present because the argument needs it or because the template suggested it?
-
-A familiar deck structure can serve intent when the audience expects rapid orientation, the presentation is procedural, or comparison across presenters matters. Do not recommend novelty for its own sake.
-
-## Slide Semantic Record
-
-Represent each slide before judging it:
+Map the deck as a sequence of claims and dependencies. Before judging a slide, represent its rhetorical job:
 
 ```yaml
 slide_id: S06
@@ -52,75 +50,135 @@ enables:
   - S07_failure_handling
 ```
 
-Use roles such as `setup`, `problem`, `claim`, `mechanism`, `evidence`, `comparison`, `decision`, `implication`, `transition`, or `summary`. Add another role only when its rhetorical job cannot be expressed by these terms.
+Use roles such as `setup`, `problem`, `claim`, `mechanism`, `evidence`, `comparison`, `decision`, `implication`, `transition`, or `summary`. Add another role only when its rhetorical job cannot be expressed by these terms. If a slide is intentionally a question or transition, state the audience change it enables instead of inventing a claim.
 
-If a slide has no claim because it is intentionally a question or transition, state the audience change it enables instead of inventing an assertion.
+Classify each heading as `topic`, `assertion`, `question`, or `transition`. Do not force every topic heading into an assertion. A topic heading can serve navigation, neutral reference, repeated category comparison, or a section divider.
 
-## Slide-Level Audit
+Count information-bearing propositions rather than lines or bullets. A proposition identifies a specific fact, mechanism, decision, comparison, constraint, piece of evidence, implication, or uncertainty.
 
-For every slide, ask:
+For each slide record, ask:
 
 1. What should the audience leave believing, understanding, asking, or anticipating?
-2. Does the role differ materially from the neighboring slides?
-3. Is the claim specific enough to be supported or challenged?
-4. Does each support item actually support the claim?
+2. Does its role differ materially from neighboring slides?
+3. Is its claim specific enough to be supported or challenged?
+4. Does each support item address that claim, including its qualifiers?
 5. Are prerequisites present before the slide depends on them?
 6. Does the slide enable later reasoning, or is it an isolated topic?
-7. Could removing or merging the slide preserve the argument?
+7. Could removing or merging it preserve the argument?
 
-Suspected defaults include a sequence of interchangeable topic slides, repeated three-bullet structures that carry the same propositions, unsupported benefit claims, and sections included only because presentations commonly contain them.
+## Diagnostic Axes
 
-The common choice can serve intent when the slide provides navigation, separates evidence for pacing, respects a time-boxed speaking rhythm, or creates a deliberate recap before a decision.
+### 1. Message Explicitness and Over-Determination
 
-## Content-Level Audit
+Ask whether the evidence, examples, and sequence already carry the message before the heading, bullets, narration, or conclusion explains it again. Test whether removing a restatement would create useful interpretive work or merely hide a necessary conclusion.
 
-Count information-bearing propositions. A phrase carries information when it identifies a specific fact, mechanism, decision, comparison, constraint, piece of evidence, implication, or uncertainty.
+Suspected default: the heading states the takeaway, the body paraphrases it, and a summary repeats it once more, closing every inference for the audience.
 
-For a generic claim such as:
+The common choice can serve intent when the deck must stand alone, records an executive decision, supports novice audiences, or requires explicit compliance language.
+
+### 2. Argument Linearity and Solution-Driven Resolution
+
+Ask whether the deck follows one clean problem-to-solution chain because the decision genuinely depends on it or because competing causes and paths were not considered. Inspect what actually produces the promised outcome: the proposal, multiple actors, operating conditions, external constraints, timing, or unresolved uncertainty.
+
+Suspected default: each section advances one preferred solution, and the solution appears to resolve every material problem introduced by the deck.
+
+The common choice can serve intent in procedural instruction, short decision briefs, emergency communication, or pitches whose alternatives were evaluated elsewhere.
+
+### 3. Information Order, Disclosure, and Recontextualization
+
+Ask when the audience receives crucial context and whether later evidence changes the meaning of earlier claims. Distinguish useful recontextualization from withholding a constraint merely to manufacture surprise.
+
+Suspected default: an agenda and background section front-load explanation, while later evidence adds facts without changing how the audience should interpret the initial problem.
+
+The common choice can serve intent when rapid orientation, chronological reporting, auditability, or comparison across presenters matters.
+
+### 4. Secondary Lines, Alternatives, and Counterarguments
+
+Ask whether secondary arguments introduce pressure, contrast, competing values, or credible alternatives. A secondary line should have a rhetorical job beyond delaying or decorating the preferred conclusion.
+
+Suspected default: every section directly advances the main recommendation, or a token alternatives or risks slide is framed so that every option confirms the preferred answer.
+
+The common choice can serve intent in tightly time-boxed briefings, status updates, or decisions whose alternatives and objections have already been resolved in an accessible source.
+
+### 5. Uncertainty, Closure, and Decision Mechanism
+
+Ask what the deck resolves: factual uncertainty, causal explanation, option comparison, ownership, timing, or authority to act. Identify which uncertainty should remain visible after the conclusion.
+
+Suspected default: benefits, recommendation, and generic next steps close the argument simultaneously, even when the evidence supports only a conditional or partial decision.
+
+The common choice can serve intent when the audience needs a clear decision request, a procedural handoff, or immediate action under already accepted assumptions.
+
+### 6. Stakeholder Agency and Value Complexity
+
+Ask who can materially change the outcome, who bears cost or risk, and whether opposing positions have intelligible incentives. Do not equate additional stakeholders or moral ambiguity with depth automatically.
+
+Suspected default: the presenter, product, or proposed solution owns meaningful agency, while customers, operators, partners, and affected groups appear only as beneficiaries, blockers, or evidence of demand.
+
+The common choice can serve intent in owner-specific updates, narrowly scoped implementation plans, or presentations where stakeholder analysis is maintained elsewhere.
+
+### 7. Emotional Framing and Urgency
+
+Ask how urgency, confidence, fear, aspiration, or reassurance enters the argument: evidence, consequence, wording, anecdote, social proof, or repeated intensifiers. Look for emotional repetition that stops carrying new information.
+
+Suspected default: each problem is escalated into a crisis, each benefit becomes transformational, and the conclusion supplies confidence or inspiration without additional support.
+
+The common choice can serve intent in fundraising, mobilization, crisis response, ceremonial speaking, or any presentation whose agreed purpose includes emotional activation.
+
+### 8. Concrete Detail and Evidentiary Specificity
+
+Ask what each prominent number, example, named mechanism, quotation, or technical detail does: support a claim, delimit scope, enable comparison, expose uncertainty, or make a consequence concrete.
+
+Suspected default: generic claims rely on decorative specificity for credibility, or use adjectives such as `robust`, `scalable`, and `significant` without evidence for the propositions they introduce.
+
+For example, do not blacklist the adjectives in:
 
 > We developed a robust and scalable system that significantly improves reliability.
 
-Do not blacklist `robust`, `scalable`, or `significantly`. Ask what evidence supports each proposition. If source material permits, replace the abstraction with a specific decision and consequence:
+Ask what supports each proposition. If the source permits, prefer a specific decision and consequence:
 
 > Parallel SQL workers return typed results through reducer channels, so completion order does not affect merged output.
 
-Also inspect:
+The common choice can serve intent when a brief example provides orientation, a memorable case anchors abstraction, or technical detail is intentionally deferred to narration or an appendix.
 
-- bullets that restate one another;
-- generic transitions that add no dependency;
-- evidence that answers a different claim;
-- conclusions that repeat rather than synthesize;
-- complete prose that belongs in narration rather than visible slide copy;
-- compressed fragments that omit the qualifier needed for accuracy.
+### 9. Source Specificity and Audience Awareness
 
-## Heading Functions
+Ask whether citations, allusions, quotations, domain conventions, and direct address have a precise rhetorical function. Check what knowledge, authority, values, and vocabulary the deck assumes of its audience.
 
-Classify each heading as one of:
+Suspected default: phrases such as `research shows`, `industry best practice`, or `customers want` invoke vague authority, while the deck addresses the audience as a uniform group with one set of interests.
 
-- `topic`: names the subject;
-- `assertion`: states a claim;
-- `question`: frames an inquiry;
-- `transition`: marks a change in argumentative function.
+The common choice can serve intent when sources are established in accompanying material, the audience shares a stable professional context, or citation detail would interrupt a deliberately high-level briefing.
 
-Do not force every topic heading into an assertion. A topic heading is appropriate for navigation, neutral reference, repeated category comparison, or a section divider. Create a ledger candidate only when the heading function fails to serve audience orientation or obscures the slide's real claim.
+### 10. Structural Repetition Across Slides
 
-## Candidate Recipe
+Ask whether slides repeatedly perform the same sequence—topic heading, three parallel bullets, benefit statement, transition—or whether repetition creates comparison, escalation, rhythm, or reliable navigation.
 
-For each material issue, record:
+Suspected default: slide titles and examples change while the slides preserve the same rhetorical work, level of abstraction, and outcome.
 
-```text
-Observed rhetorical choice → slide/deck evidence → suspected template default
-→ audience/goal relationship → keep/revise alternatives → trade-off → recommendation
-```
+The common choice can serve intent in repeated category comparisons, recurring operational reviews, teaching sequences, workshops, or deliberate recaps before a decision.
 
-Prefer upstream deck or slide-role entries over many sentence-level duplicates.
+## Cross-Slide Audit
+
+After local candidates are found, check:
+
+- whether two entries describe one upstream deck-structure decision;
+- whether evidence arrives where the claim needs it;
+- whether a slide depends on a premise that appears only later;
+- whether apparent repetition is comparison, escalation, pacing, or redundancy;
+- whether removing or merging a slide preserves the argument;
+- whether the conclusion synthesizes dependencies or only repeats prior propositions;
+- whether an agenda, background, solution, benefits, risks, or future-work section exists because the argument needs it or because the template suggested it;
+- whether a proposed unusual alternative violates audience needs, delivery mode, time, or the desired effect.
+
+Merge duplicates into the highest useful scope. Record dependencies before human review.
 
 ## Recommendation Calibration
 
-- `keep`: the familiar structure or wording serves audience and goal.
-- `revise`: a more specific claim, better evidence alignment, or changed order improves the argument.
-- `remove`: a section, slide, or proposition performs no needed rhetorical work.
-- `investigate`: evidence, audience needs, or presenter intent is missing.
+- `keep`: the choice serves intent and its familiarity is not a problem.
+- `revise`: a concrete alternative improves claim specificity, evidence alignment, order, or audience effect at acceptable cost.
+- `remove`: a section, slide, or proposition performs no needed rhetorical work and weakens another intent constraint.
+- `investigate`: evidence, audience needs, source material, or presenter intent is missing.
+
+Prefer a small number of material candidates over a catalogue of every recognizable tendency.
 
 ## Excluded Visual Concerns
 
