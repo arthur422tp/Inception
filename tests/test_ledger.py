@@ -197,6 +197,106 @@ class LedgerValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(LedgerValidationError, "regression.checks"):
             validate_ledger(payload)
 
+    def test_complete_rejects_pending_or_unfinished_mutating_entries(self) -> None:
+        payload = valid_payload()
+        payload["state"] = "complete"
+        with self.assertRaisesRegex(LedgerValidationError, "human_decision.status"):
+            validate_ledger(payload)
+
+        payload = valid_payload()
+        payload["state"] = "complete"
+        payload["entries"][0]["human_decision"] = {  # type: ignore[index]
+            "status": "accepted", "selected_action": "revise", "notes": "Approved"
+        }
+        with self.assertRaisesRegex(LedgerValidationError, "revision.status"):
+            validate_ledger(payload)
+
+    def test_passed_regression_requires_applied_revision(self) -> None:
+        payload = valid_payload()
+        payload["entries"][0]["regression"] = {  # type: ignore[index]
+            "status": "passed", "checks": ["intent.must_preserve"]
+        }
+        with self.assertRaisesRegex(LedgerValidationError, "revision.status"):
+            validate_ledger(payload)
+
+    def test_applied_revision_requires_a_mutating_selected_action(self) -> None:
+        for action in ("keep", "investigate"):
+            with self.subTest(action=action):
+                payload = valid_payload()
+                entry = payload["entries"][0]  # type: ignore[index]
+                entry["recommendation"]["action"] = action
+                entry["human_decision"] = {
+                    "status": "accepted", "selected_action": action, "notes": "Approved"
+                }
+                entry["revision"] = {
+                    "status": "applied", "summary": "Changed draft", "artifact_ref": "draft-002"
+                }
+                with self.assertRaisesRegex(LedgerValidationError, "selected_action"):
+                    validate_ledger(payload)
+
+    def test_entry_requires_at_least_one_alternative(self) -> None:
+        payload = valid_payload()
+        payload["entries"][0]["alternatives"] = []  # type: ignore[index]
+        with self.assertRaisesRegex(LedgerValidationError, "alternatives"):
+            validate_ledger(payload)
+
+    def test_evidence_and_completed_records_require_nonblank_strings(self) -> None:
+        payload = valid_payload()
+        payload["entries"][0]["evidence"] = ["   "]  # type: ignore[index]
+        with self.assertRaisesRegex(LedgerValidationError, r"evidence\[0\]"):
+            validate_ledger(payload)
+
+        for field in ("summary", "artifact_ref"):
+            with self.subTest(field=field):
+                payload = valid_payload()
+                entry = payload["entries"][0]  # type: ignore[index]
+                entry["human_decision"] = {
+                    "status": "accepted", "selected_action": "revise", "notes": "Approved"
+                }
+                entry["revision"] = {
+                    "status": "applied", "summary": "Changed ending", "artifact_ref": "draft-002"
+                }
+                entry["revision"][field] = ""
+                with self.assertRaisesRegex(LedgerValidationError, f"revision.{field}"):
+                    validate_ledger(payload)
+
+        payload = valid_payload()
+        entry = payload["entries"][0]  # type: ignore[index]
+        entry["human_decision"] = {
+            "status": "accepted", "selected_action": "revise", "notes": "Approved"
+        }
+        entry["revision"] = {
+            "status": "applied", "summary": "Changed ending", "artifact_ref": "draft-002"
+        }
+        entry["regression"] = {"status": "passed", "checks": [""]}
+        with self.assertRaisesRegex(LedgerValidationError, r"regression.checks\[0\]"):
+            validate_ledger(payload)
+
+    def test_accepts_complete_applied_revision_and_nonmutating_decision(self) -> None:
+        payload = valid_payload()
+        payload["state"] = "complete"
+        entry = payload["entries"][0]  # type: ignore[index]
+        entry["human_decision"] = {
+            "status": "accepted", "selected_action": "revise", "notes": "Approved"
+        }
+        entry["revision"] = {
+            "status": "applied", "summary": "Changed ending", "artifact_ref": "draft-002"
+        }
+        entry["regression"] = {"status": "passed", "checks": ["intent.must_preserve"]}
+        validate_ledger(payload)
+
+        payload = valid_payload()
+        payload["state"] = "complete"
+        entry = payload["entries"][0]  # type: ignore[index]
+        entry["recommendation"]["action"] = "keep"
+        entry["human_decision"] = {
+            "status": "accepted", "selected_action": "keep", "notes": "Keep as written"
+        }
+        entry["revision"] = {
+            "status": "not_applicable", "summary": "", "artifact_ref": ""
+        }
+        validate_ledger(payload)
+
     def test_allows_empty_findings(self) -> None:
         payload = valid_payload()
         payload["entries"] = []

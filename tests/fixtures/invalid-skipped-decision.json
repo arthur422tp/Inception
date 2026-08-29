@@ -14,7 +14,13 @@
       "diagnostic_axis": "closure_and_resolution",
       "intent_relevance": "The intent calls for unresolved moral tension.",
       "evidence": ["Scene 4, final two paragraphs"],
-      "alternatives": [],
+      "alternatives": [
+        {
+          "label": "Keep the disagreement unresolved",
+          "effect": "Preserves moral tension into the ending.",
+          "tradeoffs": ["Less immediate emotional closure"]
+        }
+      ],
       "recommendation": {
         "action": "revise",
         "rationale": "The current closure contradicts the desired effect."

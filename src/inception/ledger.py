@@ -55,13 +55,29 @@ def _require_string(value: object, path: str) -> None:
         _fail(path, "must be a string")
 
 
-def _require_strings(value: object, path: str, *, nonempty: bool = False) -> list[object]:
+def _require_nonblank_string(value: object, path: str) -> None:
+    _require_string(value, path)
+    if not value.strip():
+        _fail(path, "must not be blank")
+
+
+def _require_strings(
+    value: object,
+    path: str,
+    *,
+    nonempty: bool = False,
+    nonblank: bool = False,
+) -> list[object]:
     if not isinstance(value, list):
         _fail(path, "must be a list")
     if nonempty and not value:
         _fail(path, "must contain at least one item")
     for index, item in enumerate(value):
-        _require_string(item, f"{path}[{index}]")
+        item_path = f"{path}[{index}]"
+        if nonblank:
+            _require_nonblank_string(item, item_path)
+        else:
+            _require_string(item, item_path)
     return value
 
 
@@ -74,30 +90,34 @@ def _require_member(value: object, choices: frozenset[str], path: str) -> None:
 def _validate_entry(entry: Mapping[str, object], path: str) -> None:
     _require_fields(entry, ENTRY_FIELDS, path)
     for field in ("id", "observed_choice", "suspected_default", "diagnostic_axis", "intent_relevance"):
-        _require_string(entry[field], f"{path}.{field}")
+        _require_nonblank_string(entry[field], f"{path}.{field}")
 
     scope = _require_mapping(entry["scope"], f"{path}.scope")
     _require_fields(scope, SCOPE_FIELDS, f"{path}.scope")
     _require_member(scope["kind"], SCOPE_KINDS, f"{path}.scope.kind")
-    _require_string(scope["ref"], f"{path}.scope.ref")
+    _require_nonblank_string(scope["ref"], f"{path}.scope.ref")
 
-    _require_strings(entry["evidence"], f"{path}.evidence", nonempty=True)
+    _require_strings(entry["evidence"], f"{path}.evidence", nonempty=True, nonblank=True)
 
     alternatives = entry["alternatives"]
     if not isinstance(alternatives, list):
         _fail(f"{path}.alternatives", "must be a list")
+    if not alternatives:
+        _fail(f"{path}.alternatives", "must contain at least one item")
     for index, alternative_value in enumerate(alternatives):
         alternative_path = f"{path}.alternatives[{index}]"
         alternative = _require_mapping(alternative_value, alternative_path)
         _require_fields(alternative, ALTERNATIVE_FIELDS, alternative_path)
-        _require_string(alternative["label"], f"{alternative_path}.label")
-        _require_string(alternative["effect"], f"{alternative_path}.effect")
-        _require_strings(alternative["tradeoffs"], f"{alternative_path}.tradeoffs")
+        _require_nonblank_string(alternative["label"], f"{alternative_path}.label")
+        _require_nonblank_string(alternative["effect"], f"{alternative_path}.effect")
+        _require_strings(
+            alternative["tradeoffs"], f"{alternative_path}.tradeoffs", nonblank=True
+        )
 
     recommendation = _require_mapping(entry["recommendation"], f"{path}.recommendation")
     _require_fields(recommendation, RECOMMENDATION_FIELDS, f"{path}.recommendation")
     _require_member(recommendation["action"], ACTIONS, f"{path}.recommendation.action")
-    _require_string(recommendation["rationale"], f"{path}.recommendation.rationale")
+    _require_nonblank_string(recommendation["rationale"], f"{path}.recommendation.rationale")
 
     human_decision = _require_mapping(entry["human_decision"], f"{path}.human_decision")
     _require_fields(human_decision, HUMAN_DECISION_FIELDS, f"{path}.human_decision")
@@ -122,12 +142,41 @@ def _validate_entry(entry: Mapping[str, object], path: str) -> None:
     regression = _require_mapping(entry["regression"], f"{path}.regression")
     _require_fields(regression, REGRESSION_FIELDS, f"{path}.regression")
     _require_member(regression["status"], REGRESSION_STATUSES, f"{path}.regression.status")
-    _require_strings(regression["checks"], f"{path}.regression.checks")
+    _require_strings(regression["checks"], f"{path}.regression.checks", nonblank=True)
 
     if revision["status"] == "applied" and human_decision["status"] not in {"accepted", "modified"}:
         _fail(f"{path}.human_decision.status", "must be accepted or modified before revision is applied")
+    if revision["status"] == "applied" and selected_action not in {"revise", "remove"}:
+        _fail(
+            f"{path}.human_decision.selected_action",
+            "must be revise or remove when revision is applied",
+        )
+    if revision["status"] == "applied":
+        _require_nonblank_string(revision["summary"], f"{path}.revision.summary")
+        _require_nonblank_string(revision["artifact_ref"], f"{path}.revision.artifact_ref")
     if regression["status"] == "passed" and not regression["checks"]:
         _fail(f"{path}.regression.checks", "must contain at least one check when regression passed")
+    if regression["status"] == "passed" and revision["status"] != "applied":
+        _fail(f"{path}.revision.status", "must be applied before regression can pass")
+
+
+def _validate_complete(entries: list[object]) -> None:
+    for index, entry_value in enumerate(entries):
+        path = f"ledger.entries[{index}]"
+        entry = _require_mapping(entry_value, path)
+        human_decision = _require_mapping(entry["human_decision"], f"{path}.human_decision")
+        revision = _require_mapping(entry["revision"], f"{path}.revision")
+        regression = _require_mapping(entry["regression"], f"{path}.regression")
+
+        if human_decision["status"] == "pending":
+            _fail(f"{path}.human_decision.status", "must not be pending when ledger is complete")
+
+        selected_action = human_decision["selected_action"]
+        if human_decision["status"] in {"accepted", "modified"} and selected_action in {"revise", "remove"}:
+            if revision["status"] != "applied":
+                _fail(f"{path}.revision.status", "must be applied when ledger is complete")
+            if regression["status"] != "passed":
+                _fail(f"{path}.regression.status", "must be passed when ledger is complete")
 
 
 def validate_ledger(payload: Mapping[str, object]) -> None:
@@ -137,9 +186,11 @@ def validate_ledger(payload: Mapping[str, object]) -> None:
     _require_member(payload["domain"], DOMAINS, "ledger.domain")
     _require_member(payload["state"], LEDGER_STATES, "ledger.state")
     for field in ("run_id", "intent_ref", "draft_ref"):
-        _require_string(payload[field], f"ledger.{field}")
+        _require_nonblank_string(payload[field], f"ledger.{field}")
     entries = payload["entries"]
     if not isinstance(entries, list):
         _fail("ledger.entries", "must be a list")
     for index, entry in enumerate(entries):
         _validate_entry(_require_mapping(entry, f"ledger.entries[{index}]"), f"ledger.entries[{index}]")
+    if payload["state"] == "complete":
+        _validate_complete(entries)
