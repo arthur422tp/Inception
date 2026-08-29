@@ -3,6 +3,7 @@
 ## Contents
 
 - Core rule
+- Inception meta-intent
 - State machine
 - Intent Contract
 - Audit procedure
@@ -18,6 +19,12 @@
 Judge whether an observable content choice serves the stated intent. A familiar choice is not automatically weak, and an unusual choice is not automatically strong.
 
 Every finding is a decision candidate. State what the draft chose, where the evidence appears, why the choice may be an easy default, and what keeping or changing it would cost.
+
+## Inception Meta-Intent
+
+Invoking Inception supplies a baseline meta-intent: reduce perceived model-default or AI-like convergence by auditing upstream content decisions rather than cosmetic wording. The human does not need to state this goal again.
+
+The meta-intent is not an authorship judgment, a finding quota, or permission to revise. It does not make familiar choices defective and does not override the artifact's audience, purpose, desired effect, must-preserve content, or constraints. The domain Intent Contract determines which defaults serve the work and which become material decision candidates.
 
 ## State Machine
 
@@ -58,6 +65,8 @@ intent:
 ```
 
 Ask only decision-relevant questions. Put domain-specific details under `constraints`; do not redefine shared fields. Resolve material open questions before revision.
+
+Do not ask whether the human wants to reduce AI-like qualities; invocation already establishes that meta-intent. Ask only for the artifact-specific information needed to apply it without sacrificing the human's actual goals.
 
 ## Audit Procedure
 

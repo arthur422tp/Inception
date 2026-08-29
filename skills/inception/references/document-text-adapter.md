@@ -31,7 +31,7 @@ Observed content choice -> document evidence -> suspected default
 
 Include a plausible reason to keep the current choice. If the only argument for change is that wording, repetition, or structure is common, do not create an entry. Prefer one upstream document- or section-level entry over many sentence-level duplicates.
 
-When the user's desired effect includes reducing a perceived AI-like quality, operationalize it as observable structure. Do not infer authorship. Do not treat formal language, formulas, technical density, or a comprehensive scope as defects by themselves.
+Apply Inception's baseline meta-intent through observable document structure without asking the user to restate it. Do not infer authorship. Do not treat formal language, formulas, technical density, or a comprehensive scope as defects by themselves.
 
 ## Semantic Levels and Section Records
 
@@ -178,7 +178,7 @@ Merge duplicates into the highest useful scope. Record dependencies before human
 
 ## Revision Priorities
 
-When an accepted revision aims to reduce perceived AI-like structure, prefer this order:
+For every accepted revision, use this default priority order unless the domain Intent Contract requires a different trade-off:
 
 1. Preserve the technical claims, formulas, evidence, limitations, definitions, and constraints that the Intent Contract protects.
 2. Merge summary or conclusion blocks that repeat the same synthesis without serving a distinct lookup or decision task.

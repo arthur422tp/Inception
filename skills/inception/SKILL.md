@@ -11,7 +11,7 @@ Treat defaults as candidates, not defects. Let the author's intent—not rarity,
 
 Diagnose content decisions rather than disliked words. Make an implicit choice visible, explain its effect, and return authority to the human.
 
-When a user wants text to feel less AI-like, translate that preference into observable intent constraints such as selective emphasis, proportionate explanation, and fewer redundant representations. Prioritize upstream content organization over word substitution, forced informality, or invented personal voice. Preserve factual accuracy, technical constraints, and necessary detail unless the human explicitly accepts a trade-off.
+Invoking Inception establishes a baseline meta-intent to reduce perceived model-default or AI-like convergence in content decisions. Do not ask the human to restate that goal. Operationalize it through observable choices such as selective emphasis, proportionate explanation, and nonredundant representation—not through authorship claims, default-as-defect rules, word substitution, forced informality, or invented personal voice. This meta-intent does not authorize revision or override the domain Intent Contract; preserve factual accuracy, technical constraints, and necessary detail unless the human explicitly accepts a trade-off.
 
 ## Required Workflow
 

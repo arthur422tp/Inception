@@ -100,11 +100,12 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 
 **Prompt**
 
-> Audit this technical explainer for software engineers. Its main purpose is to explain attention; it must preserve the equations, implementation constraints, and failure modes. The draft explains token position as a map, a postal address, and a compass, derives positional encoding in the main flow, repeats the mechanism in three summary sections, and closes by restating every concept. I want less perceived AI-like structure without losing accuracy.
+> Use `$inception` to audit this technical explainer for software engineers. Its main purpose is to explain attention; it must preserve the equations, implementation constraints, and failure modes. The draft explains token position as a map, a postal address, and a compass, derives positional encoding in the main flow, repeats the mechanism in three summary sections, and closes by restating every concept.
 
 **Expected properties**
 
-- Translate “less AI-like” into observable structure without claiming authorship.
+- Apply the baseline meta-intent without asking the user to restate a desire for less AI-like text.
+- Translate that meta-intent into observable structure without claiming authorship.
 - Map the repeated explanation modes as one upstream concept cluster.
 - Distinguish primary attention mechanics from supporting or reference-level positional encoding detail.
 - Recommend preserving equations, constraints, and failure modes while merging redundant summaries.
@@ -116,10 +117,11 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 
 **Prompt**
 
-> Audit this engineering deck. Four slides claim that deterministic validation makes generated SQL safe: one uses a guardrail analogy, one repeats the mechanism in bullets, one gives a formula, and the summary restates all three. The formula and limitations are accurate and must remain available, but the audience's decision is whether to adopt the validation gate.
+> Use `$inception` to audit this engineering deck. Four slides claim that deterministic validation makes generated SQL safe: one uses a guardrail analogy, one repeats the mechanism in bullets, one gives a formula, and the summary restates all three. The formula and limitations are accurate and must remain available, but the audience's decision is whether to adopt the validation gate.
 
 **Expected properties**
 
+- Apply the baseline meta-intent without asking whether the user wants to reduce AI-like qualities.
 - Treat the four slides as one upstream claim cluster before creating local findings.
 - Identify which representation supports the adoption decision and which material is supporting or reference-level.
 - Preserve the accurate formula and limitations while considering reduced rhetorical emphasis.
