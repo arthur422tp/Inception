@@ -134,10 +134,8 @@ def validate_ledger(payload: Mapping[str, object]) -> None:
     _require_fields(payload, TOP_LEVEL_FIELDS, "ledger")
     if not isinstance(payload["ledger_version"], int) or isinstance(payload["ledger_version"], bool) or payload["ledger_version"] != 1:
         _fail("ledger.ledger_version", "must equal 1")
-    if payload["domain"] not in DOMAINS:
-        _fail("ledger.domain", f"must be one of {sorted(DOMAINS)}")
-    if payload["state"] not in LEDGER_STATES:
-        _fail("ledger.state", f"must be one of {sorted(LEDGER_STATES)}")
+    _require_member(payload["domain"], DOMAINS, "ledger.domain")
+    _require_member(payload["state"], LEDGER_STATES, "ledger.state")
     for field in ("run_id", "intent_ref", "draft_ref"):
         _require_string(payload[field], f"ledger.{field}")
     entries = payload["entries"]

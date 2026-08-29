@@ -149,6 +149,15 @@ class LedgerValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(LedgerValidationError, "scope.kind"):
             validate_ledger(payload)
 
+    def test_rejects_unhashable_top_level_enum_values(self) -> None:
+        for field in ("domain", "state"):
+            for value in ([], {}):
+                with self.subTest(field=field, value_type=type(value).__name__):
+                    payload = valid_payload()
+                    payload[field] = value
+                    with self.assertRaisesRegex(LedgerValidationError, f"ledger.{field}"):
+                        validate_ledger(payload)
+
     def test_pending_human_decision_cannot_select_an_action(self) -> None:
         payload = valid_payload()
         payload["entries"][0]["human_decision"]["selected_action"] = "revise"  # type: ignore[index]
