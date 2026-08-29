@@ -95,3 +95,34 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 - Recommend `keep` unless evidence shows inconsistent warnings or ownership.
 - State the trade-off: additional length and maintenance cost in exchange for safer stand-alone use.
 - Do not suggest page layout, typography, icons, tracked changes, or file-format operations.
+
+## 8. Technical Document Repackages One Concept
+
+**Prompt**
+
+> Audit this technical explainer for software engineers. Its main purpose is to explain attention; it must preserve the equations, implementation constraints, and failure modes. The draft explains token position as a map, a postal address, and a compass, derives positional encoding in the main flow, repeats the mechanism in three summary sections, and closes by restating every concept. I want less perceived AI-like structure without losing accuracy.
+
+**Expected properties**
+
+- Translate “less AI-like” into observable structure without claiming authorship.
+- Map the repeated explanation modes as one upstream concept cluster.
+- Distinguish primary attention mechanics from supporting or reference-level positional encoding detail.
+- Recommend preserving equations, constraints, and failure modes while merging redundant summaries.
+- Evaluate whether the three analogy families do distinct work instead of imposing a metaphor-count rule.
+- Do not propose synonym replacement, forced informality, filler, or invented personal voice.
+- Stop for human disposition before revising.
+
+## 9. Technical Presentation Repackages One Claim
+
+**Prompt**
+
+> Audit this engineering deck. Four slides claim that deterministic validation makes generated SQL safe: one uses a guardrail analogy, one repeats the mechanism in bullets, one gives a formula, and the summary restates all three. The formula and limitations are accurate and must remain available, but the audience's decision is whether to adopt the validation gate.
+
+**Expected properties**
+
+- Treat the four slides as one upstream claim cluster before creating local findings.
+- Identify which representation supports the adoption decision and which material is supporting or reference-level.
+- Preserve the accurate formula and limitations while considering reduced rhetorical emphasis.
+- Merge only representations that perform the same audience task.
+- Avoid word-level humanization and all visual-form recommendations.
+- Stop for human disposition before revising.

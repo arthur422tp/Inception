@@ -11,6 +11,8 @@ Treat defaults as candidates, not defects. Let the author's intent—not rarity,
 
 Diagnose content decisions rather than disliked words. Make an implicit choice visible, explain its effect, and return authority to the human.
 
+When a user wants text to feel less AI-like, translate that preference into observable intent constraints such as selective emphasis, proportionate explanation, and fewer redundant representations. Prioritize upstream content organization over word substitution, forced informality, or invented personal voice. Preserve factual accuracy, technical constraints, and necessary detail unless the human explicitly accepts a trade-off.
+
 ## Required Workflow
 
 1. Read [references/core-workflow.md](references/core-workflow.md) completely.

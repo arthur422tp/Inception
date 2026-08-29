@@ -5,8 +5,10 @@
 - Scope and evidence
 - Candidate recipe
 - Semantic levels and slide records
+- Upstream argument pass
 - Diagnostic axes
 - Cross-slide audit
+- Revision priorities
 - Recommendation calibration
 - Excluded visual concerns
 
@@ -26,6 +28,8 @@ Observed rhetorical choice -> slide/deck evidence -> suspected default
 ```
 
 Include a plausible reason to keep the current choice. If the only argument for change is that a structure or phrase is common, do not create an entry. Prefer one upstream deck- or slide-role entry over many sentence-level duplicates.
+
+When the user's desired effect includes reducing a perceived AI-like quality, operationalize it as observable rhetorical structure. Do not infer authorship. Do not treat formal language, formulas, technical density, or a comprehensive scope as defects by themselves.
 
 ## Semantic Levels and Slide Records
 
@@ -66,6 +70,20 @@ For each slide record, ask:
 6. Does the slide enable later reasoning, or is it an isolated topic?
 7. Could removing or merging it preserve the argument?
 
+## Upstream Argument Pass
+
+Before creating slide-local entries, inventory each material claim or concept across the deck. Record its appearances and explanatory modes: title assertion, definition, mechanism, formula, analogy, example, evidence, transition, recap, or conclusion.
+
+For each appearance, ask what distinct audience change it enables. If a claim is repeatedly titled, paraphrased, analogized, formalized, exemplified, and summarized without adding a prerequisite, evidence item, qualification, comparison, decision, or action, treat the cluster as one upstream deck candidate.
+
+Assign each claim or concept a deck-level salience:
+
+- `primary`: necessary to the deck's argument or decision;
+- `supporting`: needed to justify, qualify, compare, or apply a primary claim;
+- `reference`: accurate and useful, but not required for the main audience journey.
+
+Salience controls rhetorical emphasis, not truth value. Preserve technical mechanisms, formulas, evidence, constraints, and limitations even when recommending that secondary material stop carrying the main argument.
+
 ## Diagnostic Axes
 
 ### 1. Message Explicitness and Over-Determination
@@ -84,11 +102,11 @@ Suspected default: each section advances one preferred solution, and the solutio
 
 The common choice can serve intent in procedural instruction, short decision briefs, emergency communication, or pitches whose alternatives were evaluated elsewhere.
 
-### 3. Information Order, Disclosure, and Recontextualization
+### 3. Information Order, Hierarchy, and Recontextualization
 
-Ask when the audience receives crucial context and whether later evidence changes the meaning of earlier claims. Distinguish useful recontextualization from withholding a constraint merely to manufacture surprise.
+Ask when the audience receives crucial context, whether later evidence changes the meaning of earlier claims, and whether each concept's emphasis matches its role in the deck. Distinguish useful recontextualization from withholding a constraint merely to manufacture surprise.
 
-Suspected default: an agenda and background section front-load explanation, while later evidence adds facts without changing how the audience should interpret the initial problem.
+Suspected default: an agenda and background section front-load explanation while later evidence adds facts without changing the initial problem; or every related technical detail receives equal rhetorical weight regardless of the decision the deck supports.
 
 The common choice can serve intent when rapid orientation, chronological reporting, auditability, or comparison across presenters matters.
 
@@ -124,9 +142,9 @@ Suspected default: each problem is escalated into a crisis, each benefit becomes
 
 The common choice can serve intent in fundraising, mobilization, crisis response, ceremonial speaking, or any presentation whose agreed purpose includes emotional activation.
 
-### 8. Concrete Detail and Evidentiary Specificity
+### 8. Concrete Detail, Evidence, and Technical Fidelity
 
-Ask what each prominent number, example, named mechanism, quotation, or technical detail does: support a claim, delimit scope, enable comparison, expose uncertainty, or make a consequence concrete.
+Ask what each prominent number, example, named mechanism, quotation, formula, or technical detail does: support a claim, delimit scope, enable comparison, expose uncertainty, or make a consequence concrete. Separate preservation of an accurate technical point from the decision about how prominently or repeatedly the deck explains it.
 
 Suspected default: generic claims rely on decorative specificity for credibility, or use adjectives such as `robust`, `scalable`, and `significant` without evidence for the propositions they introduce.
 
@@ -138,7 +156,7 @@ Ask what supports each proposition. If the source permits, prefer a specific dec
 
 > Parallel SQL workers return typed results through reducer channels, so completion order does not affect merged output.
 
-The common choice can serve intent when a brief example provides orientation, a memorable case anchors abstraction, or technical detail is intentionally deferred to narration or an appendix.
+Do not remove formulas, caveats, failure modes, or technical limits merely to make the deck sound more natural. The common choice can serve intent when a brief example provides orientation, a memorable case anchors abstraction, or technical detail is intentionally deferred to narration or an appendix.
 
 ### 9. Source Specificity and Audience Awareness
 
@@ -148,13 +166,13 @@ Suspected default: phrases such as `research shows`, `industry best practice`, o
 
 The common choice can serve intent when sources are established in accompanying material, the audience shares a stable professional context, or citation detail would interrupt a deliberately high-level briefing.
 
-### 10. Structural Repetition Across Slides
+### 10. Structural Repetition and Representational Proliferation
 
-Ask whether slides repeatedly perform the same sequence—topic heading, three parallel bullets, benefit statement, transition—or whether repetition creates comparison, escalation, rhythm, or reliable navigation.
+Ask whether slides repeatedly perform the same sequence—topic heading, three parallel bullets, benefit statement, transition—or whether repetition creates comparison, escalation, rhythm, or reliable navigation. Also ask whether one claim is repeatedly repackaged through titles, analogy families, examples, formulas, recaps, and summary slides that perform the same rhetorical job.
 
-Suspected default: slide titles and examples change while the slides preserve the same rhetorical work, level of abstraction, and outcome.
+Suspected default: slide titles and examples change while slides preserve the same rhetorical work; or each concept receives several explanatory forms even though later forms add no evidence, qualification, comparison, decision, or action.
 
-The common choice can serve intent in repeated category comparisons, recurring operational reviews, teaching sequences, workshops, or deliberate recaps before a decision.
+The common choice can serve intent in repeated category comparisons, recurring operational reviews, teaching sequences, workshops, deliberate recaps before a decision, or mixed-expertise audiences whose members need genuinely different representations.
 
 ## Cross-Slide Audit
 
@@ -163,6 +181,9 @@ After local candidates are found, check:
 - whether two entries describe one upstream deck-structure decision;
 - whether evidence arrives where the claim needs it;
 - whether a slide depends on a premise that appears only later;
+- whether the same proposition is being re-explained or doing new rhetorical work;
+- whether multiple analogy families clarify distinct aspects or increase translation burden;
+- whether primary, supporting, and reference material receive proportionate emphasis;
 - whether apparent repetition is comparison, escalation, pacing, or redundancy;
 - whether removing or merging a slide preserves the argument;
 - whether the conclusion synthesizes dependencies or only repeats prior propositions;
@@ -170,6 +191,18 @@ After local candidates are found, check:
 - whether a proposed unusual alternative violates audience needs, delivery mode, time, or the desired effect.
 
 Merge duplicates into the highest useful scope. Record dependencies before human review.
+
+## Revision Priorities
+
+When an accepted revision aims to reduce perceived AI-like structure, prefer this order:
+
+1. Preserve the technical claims, formulas, evidence, limitations, definitions, and constraints that the Intent Contract protects.
+2. Merge slides or sections that repeat the same synthesis without serving a distinct audience or decision task.
+3. Consolidate multiple analogy families when they re-explain the same concept; retain the representation that best serves the audience.
+4. Keep accurate but secondary derivations or formulas available at `supporting` or `reference` salience instead of deleting them.
+5. Re-check whether each remaining representation adds a mechanism, use case, qualification, evidence item, comparison, decision, or action.
+
+Do not substitute synonyms, force conversational phrasing, add filler, or invent presenter personality as a proxy for structural revision.
 
 ## Recommendation Calibration
 
