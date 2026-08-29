@@ -112,9 +112,6 @@ python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_valida
   skills/inception
 ```
 
-prompt 與 adapter 文件採用 structural validation，加上位於 `tests/skill-smoke/scenarios.md` 的 representative smoke scenarios。
-
-這些 prompt 與 adapter **刻意不採用 RED/GREEN prompt TDD**。
 
 ## Non-Goals
 
