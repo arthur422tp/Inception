@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import contextlib
 import io
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -15,6 +17,27 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 class CliTests(unittest.TestCase):
+    def test_standalone_script_runs_without_inception_package(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            isolated_skill = Path(directory) / "skills" / "intent-preserving-default-auditor"
+            shutil.copytree(
+                Path(__file__).resolve().parents[1] / "skills" / "intent-preserving-default-auditor",
+                isolated_skill,
+            )
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(isolated_skill / "scripts" / "validate_ledger.py"),
+                    str(FIXTURES / "valid-ledger.json"),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.strip(), f"valid: {FIXTURES / 'valid-ledger.json'}")
+
     def test_valid_file_returns_zero(self) -> None:
         output = io.StringIO()
         with contextlib.redirect_stdout(output):
