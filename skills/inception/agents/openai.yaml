@@ -1,4 +1,4 @@
 interface:
   display_name: "Inception"
   short_description: "Audit content defaults against author intent"
-  default_prompt: "Use $inception to audit this fiction or presentation text against my intent, record a Decision Ledger, and wait before revising."
+  default_prompt: "Use $inception to audit this fiction, presentation, or document text against my intent, record a Decision Ledger, and wait before revising."

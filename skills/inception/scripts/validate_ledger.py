@@ -8,7 +8,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import NoReturn
 
-DOMAINS = frozenset({"fiction", "presentation_text"})
+DOMAINS = frozenset({"fiction", "presentation_text", "document_text"})
 LEDGER_STATES = frozenset({
     "intent", "initial_draft", "domain_audit", "awaiting_human_decision",
     "revision", "regression_audit", "complete",

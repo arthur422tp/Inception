@@ -4,14 +4,15 @@ Inception
 
 本 repository 包含名為 `inception` 的 Codex skill，這是一個受到 StoryScope 啟發而開發的工具。
 
-StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)）在 AI fiction 的研究中觀察到，AI 生成故事可能較常採用整齊、單一路徑的情節並過度解釋主題。這個 skill 將這類 population-level observation 作為提出 audit hypotheses 的參考；它不是對所有內容的普遍寫作規則，也不代表 presentation text 已有相同程度的研究證據。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
+StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)）在 AI fiction 的研究中觀察到，AI 生成故事可能較常採用整齊、單一路徑的情節並過度解釋主題。這個 skill 將這類 population-level observation 作為提出 audit hypotheses 的參考；它不是對所有內容的普遍寫作規則，也不代表 presentation text 或 document text 已有相同程度的研究證據。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
 第一個版本支援：
 
 - fiction（小說／虛構敘事）；
-- presentation text（簡報文字內容），包含整份簡報的論證架構、單張投影片的功能、claims 與 evidence。
+- presentation text（簡報文字內容），包含整份簡報的論證架構、單張投影片的功能、claims 與 evidence；
+- document text（文件文字內容），包含 reports、proposals、memos、specifications、policies、SOPs 與 research summaries。
 
-目前刻意排除簡報的視覺設計，例如 typography、color、spacing、layout、icons 與 slide masters。
+目前刻意排除簡報的視覺設計與文件格式操作，例如 typography、color、spacing、layout、pagination、tracked changes 與檔案操作。
 
 ## Workflow
 
@@ -47,6 +48,7 @@ skills/inception/
 ├── agents/openai.yaml
 ├── references/
 │   ├── core-workflow.md
+│   ├── document-text-adapter.md
 │   ├── fiction-adapter.md
 │   └── presentation-text-adapter.md
 └── scripts/validate_ledger.py
@@ -78,7 +80,7 @@ ln -s "$(pwd)/skills/inception" ~/.codex/skills/inception
 $inception
 ```
 
-也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction 或 presentation text。
+也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction、presentation text 或 document text。
 
 ## Validate a Decision Ledger
 
@@ -125,4 +127,4 @@ prompt 與 adapter 文件採用 structural validation，加上位於 `tests/skil
 - 在人類完成 disposition 之前自動改寫內容；
 - 將 StoryScope 所觀察到的 population-level tendencies 視為適用於所有文本的普遍寫作規則；
 - 簡報的 visual presentation design；
-- 第一個版本中的 research writing 或其他 domain adapters。
+- 文件的 layout、file-format operations、tracked changes 或 comments。

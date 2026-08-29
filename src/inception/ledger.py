@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import NoReturn
 
-DOMAINS = frozenset({"fiction", "presentation_text"})
+DOMAINS = frozenset({"fiction", "presentation_text", "document_text"})
 LEDGER_STATES = frozenset({
     "intent", "initial_draft", "domain_audit", "awaiting_human_decision",
     "revision", "regression_audit", "complete",

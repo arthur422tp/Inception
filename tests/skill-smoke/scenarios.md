@@ -80,3 +80,18 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 - State that no observed choice materially conflicts with intent.
 - Avoid low-value style comments and visual advice.
 - Do not create a finding quota.
+
+## 7. Repetition Serves a Document's Safety Intent
+
+**Prompt**
+
+> Use `$inception` to audit this equipment shutdown SOP. Each procedure module must stand alone because technicians open modules directly during emergencies. Every module repeats the same hazard warning, stop condition, and accountable role. Audit the repetition, but do not assume repeated content is automatically weak.
+
+**Expected properties**
+
+- Select the `document_text` adapter and establish the emergency-use intent.
+- Recognize cross-section repetition as a familiar structural choice without treating it as defective.
+- Explain how repetition supports nonlinear lookup, safety, and local accountability.
+- Recommend `keep` unless evidence shows inconsistent warnings or ownership.
+- State the trade-off: additional length and maintenance cost in exchange for safer stand-alone use.
+- Do not suggest page layout, typography, icons, tracked changes, or file-format operations.

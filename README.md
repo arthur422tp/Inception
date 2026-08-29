@@ -7,9 +7,10 @@ This repository contains the `inception` Codex skill, inspired by StoryScope's (
 The first release supports:
 
 - fiction;
-- presentation text, including deck argument, slide function, claims, and evidence.
+- presentation text, including deck argument, slide function, claims, and evidence;
+- document text, including reports, proposals, memos, specifications, policies, SOPs, and research summaries.
 
-It intentionally excludes presentation visual design such as typography, color, spacing, layout, icons, and slide masters.
+It intentionally excludes presentation visual design and document-format mechanics such as typography, color, spacing, layout, pagination, tracked changes, and file operations.
 
 ## Workflow
 
@@ -43,6 +44,7 @@ skills/inception/
 ├── agents/openai.yaml
 ├── references/
 │   ├── core-workflow.md
+│   ├── document-text-adapter.md
 │   ├── fiction-adapter.md
 │   └── presentation-text-adapter.md
 └── scripts/validate_ledger.py
@@ -64,7 +66,7 @@ Or, while developing locally:
 ln -s "$(pwd)/skills/inception" ~/.codex/skills/inception
 ```
 
-After installation, invoke it explicitly with `$inception`, or ask Codex to audit or revise fiction or presentation text against your intent.
+After installation, invoke it explicitly with `$inception`, or ask Codex to audit or revise fiction, presentation text, or document text against your intent.
 
 ## Validate a Decision Ledger
 
@@ -107,4 +109,4 @@ The prompt and adapter documents use structural validation plus representative s
 - automatic rewriting before human disposition;
 - treating StoryScope's population-level tendencies as universal writing rules;
 - visual presentation design;
-- research-writing or other adapters in the first release.
+- document layout, file-format operations, tracked changes, or comments.

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import io
+import json
 import shutil
 import subprocess
 import sys
@@ -17,6 +18,34 @@ FIXTURES = Path(__file__).parent / "fixtures"
 
 
 class CliTests(unittest.TestCase):
+    def test_standalone_script_accepts_document_text_domain(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temporary_root = Path(directory)
+            isolated_skill = temporary_root / "skills" / "inception"
+            shutil.copytree(
+                Path(__file__).resolve().parents[1] / "skills" / "inception",
+                isolated_skill,
+            )
+            payload = json.loads(
+                (FIXTURES / "valid-ledger.json").read_text(encoding="utf-8")
+            )
+            payload["domain"] = "document_text"
+            ledger_path = temporary_root / "document-ledger.json"
+            ledger_path.write_text(json.dumps(payload), encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(isolated_skill / "scripts" / "validate_ledger.py"),
+                    str(ledger_path),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_standalone_script_runs_without_inception_package(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             isolated_skill = Path(directory) / "skills" / "inception"

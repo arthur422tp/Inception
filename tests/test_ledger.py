@@ -50,6 +50,12 @@ class LedgerValidationTests(unittest.TestCase):
     def test_accepts_valid_pending_ledger(self) -> None:
         validate_ledger(valid_payload())
 
+    def test_accepts_document_text_domain(self) -> None:
+        payload = valid_payload()
+        payload["domain"] = "document_text"
+
+        validate_ledger(payload)
+
     def test_requires_every_top_level_field(self) -> None:
         fields = (
             "ledger_version", "run_id", "domain", "state",

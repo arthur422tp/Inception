@@ -1,6 +1,6 @@
 ---
 name: inception
-description: Use when creating, auditing, or revising fiction or presentation text where generic structure, tidy closure, unsupported claims, repeated content, template dependence, or other model-default choices may conflict with the author's intent.
+description: Use when creating, auditing, or revising fiction, presentation text, or document text where generic structure, tidy closure, unsupported claims, repeated content, template dependence, or other model-default choices may conflict with the author's intent.
 ---
 
 # Inception
@@ -19,6 +19,7 @@ Diagnose content decisions rather than disliked words. Make an implicit choice v
 4. Select exactly one adapter and read it completely:
    - Fiction, story, scene, or narrative → [references/fiction-adapter.md](references/fiction-adapter.md)
    - Deck, slide, presentation copy, or speaker-facing argument → [references/presentation-text-adapter.md](references/presentation-text-adapter.md)
+   - Report, proposal, memo, specification, policy, SOP, or other sustained document text → [references/document-text-adapter.md](references/document-text-adapter.md)
 5. Audit observable choices against intent. Create only evidence-backed Decision Ledger entries.
 6. Present the ledger and stop for human decisions. Do not materially revise while any affected entry remains pending, rejected, or deferred.
 7. Apply only accepted or modified actions.
@@ -45,3 +46,4 @@ Fix every reported invariant violation before revision.
 - Do not treat StoryScope population tendencies as quality rules.
 - Do not auto-rewrite material decisions before human disposition.
 - Do not give presentation advice about typography, color, spacing, grid, alignment, visual hierarchy, icons, illustrations, slide masters, or visual style.
+- Do not give document advice about page layout, typography, margins, pagination, tracked changes, comments, or file-format mechanics.
