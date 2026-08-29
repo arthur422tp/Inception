@@ -1,5 +1,7 @@
 # Inception
 
+[English](README.md) | [繁體中文](README.zh-TW.md)
+
 Inception contains `intent-preserving-default-auditor`, a Codex skill inspired by StoryScope's observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
 
 The first release supports:

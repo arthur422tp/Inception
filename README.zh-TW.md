@@ -1,0 +1,124 @@
+# Inception
+
+[English](README.md) | [繁體中文](README.zh-TW.md)
+
+Inception 包含 `intent-preserving-default-auditor`，這是一個受到 StoryScope 啟發而開發的 Codex skill。
+
+StoryScope 的核心觀察之一是：模型在生成內容時，經常會收斂到熟悉、常見或高機率的內容選擇。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
+
+第一個版本支援：
+
+* fiction（小說／虛構敘事）；
+* presentation text（簡報文字內容），包含整份簡報的論證架構、單張投影片的功能、claims 與 evidence。
+
+目前刻意排除簡報的視覺設計，例如 typography、color、spacing、layout、icons 與 slide masters。
+
+## Workflow
+
+每一次 audit 都遵循相同的 gated sequence：
+
+```text
+intent
+  → initial_draft
+  → domain_audit
+  → awaiting_human_decision
+  → revision
+  → regression_audit
+  → complete
+```
+
+audit 會產生一份由證據支持的 **Decision Ledger**。
+
+任何 material change 在進入 `revision` 階段之前，相關的 ledger entry 都必須先取得人類的 `accepted` 或 `modified` decision。
+
+如果初始 draft 沒有發現需要處理的實質問題，Decision Ledger 可以是空的。
+
+## Skill Layout
+
+project-local skill 存放於：
+
+```text
+skills/intent-preserving-default-auditor/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/
+│   ├── core-workflow.md
+│   ├── fiction-adapter.md
+│   └── presentation-text-adapter.md
+└── scripts/validate_ledger.py
+```
+
+`SKILL.md` 會載入 Core workflow，以及**且僅載入一個** domain adapter。
+
+較詳細的 domain-specific guidance 則保留在 `references/` 中，避免與目前任務無關的 domain 文件佔用 context。
+
+## Make the Skill Discoverable
+
+repository 是這個 skill 的 source of truth。
+
+若要讓它成為個人 Codex skill，可以將 skill folder 複製或連結到 `~/.codex/skills/`：
+
+```bash
+cp -R skills/intent-preserving-default-auditor ~/.codex/skills/
+```
+
+或者在本地開發期間使用 symbolic link：
+
+```bash
+ln -s "$(pwd)/skills/intent-preserving-default-auditor" ~/.codex/skills/intent-preserving-default-auditor
+```
+
+安裝完成後，可以使用以下方式明確呼叫：
+
+```text
+$intent-preserving-default-auditor
+```
+
+也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction 或 presentation text。
+
+## Validate a Decision Ledger
+
+Decision Ledger 使用 JSON 格式，因此 workflow gate 可以透過程式進行 deterministic validation：
+
+```bash
+.venv/bin/python skills/intent-preserving-default-auditor/scripts/validate_ledger.py \
+  tests/fixtures/valid-ledger.json
+```
+
+預期輸出：
+
+```text
+valid: tests/fixtures/valid-ledger.json
+```
+
+如果輸入不合法，程式會以 non-zero status 結束，並回報發生問題的確切 field path。
+
+## Run Tests
+
+Python utilities 僅使用 Python 3.11 standard library：
+
+```bash
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+也可以使用 Codex 的 `skill-creator` utility 驗證 skill folder 本身：
+
+```bash
+python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
+  skills/intent-preserving-default-auditor
+```
+
+prompt 與 adapter 文件採用 structural validation，加上位於 `tests/skill-smoke/scenarios.md` 的 representative smoke scenarios。
+
+這些 prompt 與 adapter **刻意不採用 RED/GREEN prompt TDD**。
+
+## Non-Goals
+
+本專案目前不以以下事項為目標：
+
+* AI source detection 或 authorship scoring；
+* 使用 word blacklist 或其他 cosmetic humanization 手段；
+* 在人類完成 disposition 之前自動改寫內容；
+* 將 StoryScope 所觀察到的 population-level tendencies 視為適用於所有文本的普遍寫作規則；
+* 簡報的 visual presentation design；
+* 第一個版本中的 research writing 或其他 domain adapters。
