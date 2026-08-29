@@ -1,0 +1,35 @@
+{
+  "ledger_version": 1,
+  "run_id": "run-002",
+  "domain": "fiction",
+  "state": "revision",
+  "intent_ref": "intent-001",
+  "draft_ref": "draft-002",
+  "entries": [
+    {
+      "id": "D001",
+      "scope": {"kind": "scene", "ref": "scene-4"},
+      "observed_choice": "The conflict resolves through sudden forgiveness.",
+      "suspected_default": "Tidy reconciliation closes the conflict immediately.",
+      "diagnostic_axis": "closure_and_resolution",
+      "intent_relevance": "The intent calls for unresolved moral tension.",
+      "evidence": ["Scene 4, final two paragraphs"],
+      "alternatives": [],
+      "recommendation": {
+        "action": "revise",
+        "rationale": "The current closure contradicts the desired effect."
+      },
+      "human_decision": {
+        "status": "pending",
+        "selected_action": null,
+        "notes": ""
+      },
+      "revision": {
+        "status": "applied",
+        "summary": "Removed the reconciliation.",
+        "artifact_ref": "draft-002"
+      },
+      "regression": {"status": "not_checked", "checks": []}
+    }
+  ]
+}

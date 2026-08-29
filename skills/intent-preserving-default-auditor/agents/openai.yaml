@@ -1,0 +1,4 @@
+interface:
+  display_name: "Intent-Preserving Default Auditor"
+  short_description: "Audit content defaults against author intent"
+  default_prompt: "Use $intent-preserving-default-auditor to audit this fiction or presentation text against my intent, record a Decision Ledger, and wait before revising."
