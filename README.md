@@ -1,2 +1,102 @@
 # Inception
-An experimental skills that motivated by StoryScope, a paper from Arxiv.
+
+Inception contains `intent-preserving-default-auditor`, a Codex skill inspired by StoryScope's observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
+
+The first release supports:
+
+- fiction;
+- presentation text, including deck argument, slide function, claims, and evidence.
+
+It intentionally excludes presentation visual design such as typography, color, spacing, layout, icons, and slide masters.
+
+## Workflow
+
+Every audit uses the same gated sequence:
+
+```text
+intent
+  → initial_draft
+  → domain_audit
+  → awaiting_human_decision
+  → revision
+  → regression_audit
+  → complete
+```
+
+The audit produces an evidence-backed Decision Ledger. Material changes cannot enter `revision` until the affected entries have an accepted or modified human decision. A clean draft may produce an empty ledger.
+
+## Skill Layout
+
+The project-local skill is stored at:
+
+```text
+skills/intent-preserving-default-auditor/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/
+│   ├── core-workflow.md
+│   ├── fiction-adapter.md
+│   └── presentation-text-adapter.md
+└── scripts/validate_ledger.py
+```
+
+`SKILL.md` loads the Core workflow and exactly one domain adapter. Detailed guidance remains in references so unrelated domains do not consume context.
+
+## Make the Skill Discoverable
+
+The repository is the source of truth. To make the skill available as a personal Codex skill, copy or link the skill folder into `~/.codex/skills/`:
+
+```bash
+cp -R skills/intent-preserving-default-auditor ~/.codex/skills/
+```
+
+Or, while developing locally:
+
+```bash
+ln -s "$(pwd)/skills/intent-preserving-default-auditor" ~/.codex/skills/intent-preserving-default-auditor
+```
+
+After installation, invoke it explicitly with `$intent-preserving-default-auditor`, or ask Codex to audit or revise fiction or presentation text against your intent.
+
+## Validate a Decision Ledger
+
+Ledger files use JSON so their gates can be checked deterministically:
+
+```bash
+.venv/bin/python skills/intent-preserving-default-auditor/scripts/validate_ledger.py \
+  tests/fixtures/valid-ledger.json
+```
+
+Expected output:
+
+```text
+valid: tests/fixtures/valid-ledger.json
+```
+
+Invalid input exits with a non-zero status and reports the exact field path.
+
+## Run Tests
+
+The Python utilities use only the Python 3.11 standard library:
+
+```bash
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+```
+
+Validate the skill folder itself with the Codex skill-creator utility:
+
+```bash
+python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
+  skills/intent-preserving-default-auditor
+```
+
+The prompt and adapter documents use structural validation plus representative smoke scenarios in `tests/skill-smoke/scenarios.md`; they intentionally do not use RED/GREEN prompt TDD.
+
+## Non-Goals
+
+- AI-source detection or authorship scoring;
+- word blacklists or cosmetic humanization;
+- automatic rewriting before human disposition;
+- treating StoryScope's population-level tendencies as universal writing rules;
+- visual presentation design;
+- research-writing or other adapters in the first release.
