@@ -4,7 +4,7 @@
 
 本 repository 包含名為 `inception` 的 Codex skill，這是一個受到 StoryScope 啟發而開發的工具。
 
-StoryScope 📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)的核心觀察之一是：模型在生成內容時，經常會收斂到熟悉、常見或高機率的內容選擇。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
+StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)） 的核心觀察之一是：模型在生成內容時，經常會收斂到熟悉、常見或高機率的內容選擇。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
 第一個版本支援：
 
