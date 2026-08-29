@@ -2,7 +2,7 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-Inception contains `intent-preserving-default-auditor`, a Codex skill inspired by StoryScope's 📄 [arXiv Paper](https://arxiv.org/abs/2604.03136) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
+This repository contains the `inception` Codex skill, inspired by StoryScope's 📄 [arXiv Paper](https://arxiv.org/abs/2604.03136) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
 
 The first release supports:
 
@@ -38,7 +38,7 @@ At that point, the skill will pause and wait for your decision. It will proceed 
 The project-local skill is stored at:
 
 ```text
-skills/intent-preserving-default-auditor/
+skills/inception/
 ├── SKILL.md
 ├── agents/openai.yaml
 ├── references/
@@ -55,23 +55,23 @@ skills/intent-preserving-default-auditor/
 The repository is the source of truth. To make the skill available as a personal Codex skill, copy or link the skill folder into `~/.codex/skills/`:
 
 ```bash
-cp -R skills/intent-preserving-default-auditor ~/.codex/skills/
+cp -R skills/inception ~/.codex/skills/
 ```
 
 Or, while developing locally:
 
 ```bash
-ln -s "$(pwd)/skills/intent-preserving-default-auditor" ~/.codex/skills/intent-preserving-default-auditor
+ln -s "$(pwd)/skills/inception" ~/.codex/skills/inception
 ```
 
-After installation, invoke it explicitly with `$intent-preserving-default-auditor`, or ask Codex to audit or revise fiction or presentation text against your intent.
+After installation, invoke it explicitly with `$inception`, or ask Codex to audit or revise fiction or presentation text against your intent.
 
 ## Validate a Decision Ledger
 
 Ledger files use JSON so their gates can be checked deterministically:
 
 ```bash
-.venv/bin/python skills/intent-preserving-default-auditor/scripts/validate_ledger.py \
+.venv/bin/python skills/inception/scripts/validate_ledger.py \
   tests/fixtures/valid-ledger.json
 ```
 
@@ -95,7 +95,7 @@ Validate the skill folder itself with the Codex skill-creator utility:
 
 ```bash
 python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
-  skills/intent-preserving-default-auditor
+  skills/inception
 ```
 
 The prompt and adapter documents use structural validation plus representative smoke scenarios in `tests/skill-smoke/scenarios.md`; they intentionally do not use RED/GREEN prompt TDD.

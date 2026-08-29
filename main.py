@@ -1,8 +1,8 @@
 def main() -> None:
     print(
-        "Inception provides the intent-preserving-default-auditor skill. "
+        "The Inception project provides the inception Codex skill. "
         "Validate a ledger with: "
-        "python skills/intent-preserving-default-auditor/scripts/validate_ledger.py "
+        "python skills/inception/scripts/validate_ledger.py "
         "<ledger.json>"
     )
 

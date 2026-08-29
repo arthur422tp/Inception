@@ -1,9 +1,9 @@
 ---
-name: intent-preserving-default-auditor
+name: inception
 description: Use when creating, auditing, or revising fiction or presentation text where generic structure, tidy closure, unsupported claims, repeated content, template dependence, or other model-default choices may conflict with the author's intent.
 ---
 
-# Intent-Preserving Default Auditor
+# Inception
 
 ## Core Principle
 

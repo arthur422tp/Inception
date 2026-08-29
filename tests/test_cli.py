@@ -19,9 +19,9 @@ FIXTURES = Path(__file__).parent / "fixtures"
 class CliTests(unittest.TestCase):
     def test_standalone_script_runs_without_inception_package(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            isolated_skill = Path(directory) / "skills" / "intent-preserving-default-auditor"
+            isolated_skill = Path(directory) / "skills" / "inception"
             shutil.copytree(
-                Path(__file__).resolve().parents[1] / "skills" / "intent-preserving-default-auditor",
+                Path(__file__).resolve().parents[1] / "skills" / "inception",
                 isolated_skill,
             )
             result = subprocess.run(

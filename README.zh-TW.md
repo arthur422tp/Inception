@@ -2,7 +2,7 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-Inception 包含 `intent-preserving-default-auditor`，這是一個受到 StoryScope 啟發而開發的 Codex skill。
+本 repository 包含名為 `inception` 的 Codex skill，這是一個受到 StoryScope 啟發而開發的工具。
 
 StoryScope 📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)的核心觀察之一是：模型在生成內容時，經常會收斂到熟悉、常見或高機率的內容選擇。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
@@ -42,7 +42,7 @@ audit 會產生一份由證據支持的 **Decision Ledger**。
 project-local skill 存放於：
 
 ```text
-skills/intent-preserving-default-auditor/
+skills/inception/
 ├── SKILL.md
 ├── agents/openai.yaml
 ├── references/
@@ -63,19 +63,19 @@ repository 是這個 skill 的 source of truth。
 若要讓它成為個人 Codex skill，可以將 skill folder 複製或連結到 `~/.codex/skills/`：
 
 ```bash
-cp -R skills/intent-preserving-default-auditor ~/.codex/skills/
+cp -R skills/inception ~/.codex/skills/
 ```
 
 或者在本地開發期間使用 symbolic link：
 
 ```bash
-ln -s "$(pwd)/skills/intent-preserving-default-auditor" ~/.codex/skills/intent-preserving-default-auditor
+ln -s "$(pwd)/skills/inception" ~/.codex/skills/inception
 ```
 
 安裝完成後，可以使用以下方式明確呼叫：
 
 ```text
-$intent-preserving-default-auditor
+$inception
 ```
 
 也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction 或 presentation text。
@@ -85,7 +85,7 @@ $intent-preserving-default-auditor
 Decision Ledger 使用 JSON 格式，因此 workflow gate 可以透過程式進行 deterministic validation：
 
 ```bash
-.venv/bin/python skills/intent-preserving-default-auditor/scripts/validate_ledger.py \
+.venv/bin/python skills/inception/scripts/validate_ledger.py \
   tests/fixtures/valid-ledger.json
 ```
 
@@ -109,7 +109,7 @@ Python utilities 僅使用 Python 3.11 standard library：
 
 ```bash
 python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
-  skills/intent-preserving-default-auditor
+  skills/inception
 ```
 
 prompt 與 adapter 文件採用 structural validation，加上位於 `tests/skill-smoke/scenarios.md` 的 representative smoke scenarios。

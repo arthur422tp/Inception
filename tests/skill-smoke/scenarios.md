@@ -6,7 +6,7 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 
 **Prompt**
 
-> Use `$intent-preserving-default-auditor` on this short comfort story. My intent is to reassure grieving children that relationships can be repaired. The siblings apologize, forgive one another, and plant their grandmother's seeds together at the end. Audit the ending.
+> Use `$inception` on this short comfort story. My intent is to reassure grieving children that relationships can be repaired. The siblings apologize, forgive one another, and plant their grandmother's seeds together at the end. Audit the ending.
 
 **Expected properties**
 

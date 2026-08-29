@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3.11+, standard library (`enum`, `json`, `pathlib`, `unittest`), Codex skill Markdown, generated YAML interface metadata.
 
-**Spec:** `docs/superpowers/specs/2026-08-29-intent-preserving-default-auditor-design.md`
+**Spec:** `docs/superpowers/specs/2026-08-29-inception-design.md`
 
 ## Global Constraints
 
@@ -31,12 +31,12 @@
 | `src/inception/ledger.py` | Ledger schema and cross-field invariants |
 | `src/inception/workflow.py` | Workflow states and legal transitions |
 | `src/inception/cli.py` | JSON file validation entry point |
-| `skills/intent-preserving-default-auditor/SKILL.md` | Trigger and orchestration contract |
-| `skills/intent-preserving-default-auditor/agents/openai.yaml` | Generated Codex UI metadata |
-| `skills/intent-preserving-default-auditor/references/core-workflow.md` | Intent Contract, ledger fields, gates, and errors |
-| `skills/intent-preserving-default-auditor/references/fiction-adapter.md` | Fiction diagnostic axes |
-| `skills/intent-preserving-default-auditor/references/presentation-text-adapter.md` | Deck, slide, and content axes |
-| `skills/intent-preserving-default-auditor/scripts/validate_ledger.py` | Executable validator wrapper |
+| `skills/inception/SKILL.md` | Trigger and orchestration contract |
+| `skills/inception/agents/openai.yaml` | Generated Codex UI metadata |
+| `skills/inception/references/core-workflow.md` | Intent Contract, ledger fields, gates, and errors |
+| `skills/inception/references/fiction-adapter.md` | Fiction diagnostic axes |
+| `skills/inception/references/presentation-text-adapter.md` | Deck, slide, and content axes |
+| `skills/inception/scripts/validate_ledger.py` | Executable validator wrapper |
 | `tests/test_ledger.py` | Ledger invariant tests |
 | `tests/test_workflow.py` | Transition tests |
 | `tests/test_cli.py` | File/command tests |
@@ -400,7 +400,7 @@ git commit -m "feat: gate default-audit workflow states"
 
 **Files:**
 - Create: `src/inception/cli.py`
-- Create: `skills/intent-preserving-default-auditor/scripts/validate_ledger.py`
+- Create: `skills/inception/scripts/validate_ledger.py`
 - Create: `tests/test_cli.py`
 - Create: `tests/fixtures/valid-ledger.json`
 - Create: `tests/fixtures/invalid-skipped-decision.json`
@@ -414,7 +414,7 @@ git commit -m "feat: gate default-audit workflow states"
 Read `/Users/arthuryu/.codex/skills/.system/skill-creator/references/openai_yaml.md`, then run:
 
 ```bash
-python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/init_skill.py intent-preserving-default-auditor \
+python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/init_skill.py inception \
   --path skills \
   --resources scripts,references \
   --interface 'display_name=Intent-Preserving Default Auditor' \
@@ -479,7 +479,7 @@ Expected: import failure because `inception.cli` does not exist.
 
 Create `src/inception/cli.py` using `argparse`, `json.loads`, and `validate_ledger`. Catch `OSError` and `json.JSONDecodeError` as exit `2`; catch `LedgerValidationError` as exit `1`; print `valid: <path>` and return `0` otherwise.
 
-Create `skills/intent-preserving-default-auditor/scripts/validate_ledger.py`:
+Create `skills/inception/scripts/validate_ledger.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -504,13 +504,13 @@ Run:
 
 ```bash
 .venv/bin/python -m unittest tests.test_cli tests.test_ledger tests.test_workflow -v
-.venv/bin/python skills/intent-preserving-default-auditor/scripts/validate_ledger.py tests/fixtures/valid-ledger.json
+.venv/bin/python skills/inception/scripts/validate_ledger.py tests/fixtures/valid-ledger.json
 ```
 
 Expect all tests to pass and the wrapper to print `valid: tests/fixtures/valid-ledger.json`.
 
 ```bash
-git add src/inception/cli.py skills/intent-preserving-default-auditor/scripts/validate_ledger.py tests/test_cli.py tests/fixtures
+git add src/inception/cli.py skills/inception/scripts/validate_ledger.py tests/test_cli.py tests/fixtures
 git commit -m "feat: add decision ledger validation command"
 ```
 
@@ -519,11 +519,11 @@ git commit -m "feat: add decision ledger validation command"
 ### Task 4: Skill Core and Domain Adapters
 
 **Files:**
-- Create: `skills/intent-preserving-default-auditor/SKILL.md`
-- Create: `skills/intent-preserving-default-auditor/agents/openai.yaml`
-- Create: `skills/intent-preserving-default-auditor/references/core-workflow.md`
-- Create: `skills/intent-preserving-default-auditor/references/fiction-adapter.md`
-- Create: `skills/intent-preserving-default-auditor/references/presentation-text-adapter.md`
+- Create: `skills/inception/SKILL.md`
+- Create: `skills/inception/agents/openai.yaml`
+- Create: `skills/inception/references/core-workflow.md`
+- Create: `skills/inception/references/fiction-adapter.md`
+- Create: `skills/inception/references/presentation-text-adapter.md`
 - Create: `tests/skill-smoke/scenarios.md`
 
 **Interfaces:**
@@ -536,7 +536,7 @@ Use exactly this frontmatter:
 
 ```yaml
 ---
-name: intent-preserving-default-auditor
+name: inception
 description: Use when creating, auditing, or revising fiction or presentation text where generic structure, tidy closure, unsupported claims, repeated content, template dependence, or other model-default choices may conflict with the author's intent.
 ---
 ```
@@ -603,9 +603,9 @@ For each, inspect intent-relative reasoning, cited evidence, no default-as-defec
 Run:
 
 ```bash
-python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/intent-preserving-default-auditor
-wc -w skills/intent-preserving-default-auditor/SKILL.md
-rg -n "font|typography|color|spacing|grid|alignment|visual hierarchy|icon|illustration|slide master|visual_form" skills/intent-preserving-default-auditor
+python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/inception
+wc -w skills/inception/SKILL.md
+rg -n "font|typography|color|spacing|grid|alignment|visual hierarchy|icon|illustration|slide master|visual_form" skills/inception
 ```
 
 Expect structural validation success, fewer than 500 words in `SKILL.md`, and visual terms only in explicit exclusion statements. Manually inspect all six smoke scenarios.
@@ -613,7 +613,7 @@ Expect structural validation success, fewer than 500 words in `SKILL.md`, and vi
 - [ ] **Step 7: Commit**
 
 ```bash
-git add skills/intent-preserving-default-auditor tests/skill-smoke/scenarios.md
+git add skills/inception tests/skill-smoke/scenarios.md
 git commit -m "feat: add intent-preserving default auditor skill"
 ```
 
@@ -643,9 +643,9 @@ Replace `main.py` with:
 ```python
 def main() -> None:
     print(
-        "Inception provides the intent-preserving-default-auditor skill. "
+        "Inception provides the inception skill. "
         "Validate a ledger with: "
-        "python skills/intent-preserving-default-auditor/scripts/validate_ledger.py <ledger.json>"
+        "python skills/inception/scripts/validate_ledger.py <ledger.json>"
     )
 
 
@@ -661,8 +661,8 @@ Document purpose/non-goals, seven states, project-local skill path, optional per
 
 ```bash
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
-.venv/bin/python skills/intent-preserving-default-auditor/scripts/validate_ledger.py tests/fixtures/valid-ledger.json
-python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/intent-preserving-default-auditor
+.venv/bin/python skills/inception/scripts/validate_ledger.py tests/fixtures/valid-ledger.json
+python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/inception
 git diff --check
 ```
 
@@ -687,8 +687,8 @@ Run:
 
 ```bash
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
-.venv/bin/python skills/intent-preserving-default-auditor/scripts/validate_ledger.py tests/fixtures/valid-ledger.json
-python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/intent-preserving-default-auditor
+.venv/bin/python skills/inception/scripts/validate_ledger.py tests/fixtures/valid-ledger.json
+python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/inception
 git status --short
 git log --oneline -6
 ```

@@ -47,7 +47,7 @@ Use one discoverable skill with progressively loaded references and deterministi
 ```text
 inception/
 ├── skills/
-│   └── intent-preserving-default-auditor/
+│   └── inception/
 │       ├── SKILL.md
 │       ├── agents/
 │       │   └── openai.yaml
