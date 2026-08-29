@@ -1,85 +1,47 @@
 ---
 name: intent-preserving-default-auditor
-description: [TODO: Complete and informative explanation of what the skill does and when to use it. Include WHEN to use this skill - specific scenarios, file types, or tasks that trigger it.]
+description: Use when creating, auditing, or revising fiction or presentation text where generic structure, tidy closure, unsupported claims, repeated content, template dependence, or other model-default choices may conflict with the author's intent.
 ---
 
-# Intent Preserving Default Auditor
+# Intent-Preserving Default Auditor
 
-## Overview
+## Core Principle
 
-[TODO: 1-2 sentences explaining what this skill enables]
+Treat defaults as candidates, not defects. Let the author's intent—not rarity, novelty, or an AI-writing stereotype—decide whether a choice should remain.
 
-## Structuring This Skill
+Diagnose content decisions rather than disliked words. Make an implicit choice visible, explain its effect, and return authority to the human.
 
-[TODO: Choose the structure that best fits this skill's purpose. Common patterns:
+## Required Workflow
 
-**1. Workflow-Based** (best for sequential processes)
-- Works well when there are clear step-by-step procedures
-- Example: DOCX skill with "Workflow Decision Tree" -> "Reading" -> "Creating" -> "Editing"
-- Structure: ## Overview -> ## Workflow Decision Tree -> ## Step 1 -> ## Step 2...
+1. Read [references/core-workflow.md](references/core-workflow.md) completely.
+2. Establish the Intent Contract before judging the draft.
+3. Obtain the user's draft or help create an initial draft. Send both through the same later states.
+4. Select exactly one adapter and read it completely:
+   - Fiction, story, scene, or narrative → [references/fiction-adapter.md](references/fiction-adapter.md)
+   - Deck, slide, presentation copy, or speaker-facing argument → [references/presentation-text-adapter.md](references/presentation-text-adapter.md)
+5. Audit observable choices against intent. Create only evidence-backed Decision Ledger entries.
+6. Present the ledger and stop for human decisions. Do not materially revise while any affected entry remains pending, rejected, or deferred.
+7. Apply only accepted or modified actions.
+8. Run the Regression Audit against affected intent constraints and dependencies. Surface any new trade-off for a human decision.
 
-**2. Task-Based** (best for tool collections)
-- Works well when the skill offers different operations/capabilities
-- Example: PDF skill with "Quick Start" -> "Merge PDFs" -> "Split PDFs" -> "Extract Text"
-- Structure: ## Overview -> ## Quick Start -> ## Task Category 1 -> ## Task Category 2...
+For an unsupported domain, explain that no adapter exists and stop. Do not borrow the nearest adapter's assumptions.
 
-**3. Reference/Guidelines** (best for standards or specifications)
-- Works well for brand guidelines, coding standards, or requirements
-- Example: Brand styling with "Brand Guidelines" -> "Colors" -> "Typography" -> "Features"
-- Structure: ## Overview -> ## Guidelines -> ## Specifications -> ## Usage...
+## Output Contract
 
-**4. Capabilities-Based** (best for integrated systems)
-- Works well when the skill provides multiple interrelated features
-- Example: Product Management with "Core Capabilities" -> numbered capability list
-- Structure: ## Overview -> ## Core Capabilities -> ### 1. Feature -> ### 2. Feature...
+Keep findings bounded and prioritized. Each entry must connect an observed choice and draft evidence to a suspected default, intent relevance, alternatives, trade-offs, and a recommendation. An empty ledger is valid.
 
-Patterns can be mixed and matched as needed. Most skills combine patterns (e.g., start with task-based, add workflow for complex operations).
+When persisting a ledger, save JSON and run:
 
-Delete this entire "Structuring This Skill" section when done - it's just guidance.]
+```bash
+python scripts/validate_ledger.py <ledger.json>
+```
 
-## [TODO: Replace with the first main section based on chosen structure]
+Fix every reported invariant violation before revision.
 
-[TODO: Add content here. See examples in existing skills:
-- Code samples for technical skills
-- Decision trees for complex workflows
-- Concrete examples with realistic user requests
-- References to scripts/templates/references as needed]
+## Hard Boundaries
 
-## Resources (optional)
-
-Create only the resource directories this skill actually needs. Delete this section if no resources are required.
-
-### scripts/
-Executable code (Python/Bash/etc.) that can be run directly to perform specific operations.
-
-**Examples from other skills:**
-- PDF skill: `fill_fillable_fields.py`, `extract_form_field_info.py` - utilities for PDF manipulation
-- DOCX skill: `document.py`, `utilities.py` - Python modules for document processing
-
-**Appropriate for:** Python scripts, shell scripts, or any executable code that performs automation, data processing, or specific operations.
-
-**Note:** Scripts may be executed without loading into context, but can still be read by Codex for patching or environment adjustments.
-
-### references/
-Documentation and reference material intended to be loaded into context to inform Codex's process and thinking.
-
-**Examples from other skills:**
-- Product management: `communication.md`, `context_building.md` - detailed workflow guides
-- BigQuery: API reference documentation and query examples
-- Finance: Schema documentation, company policies
-
-**Appropriate for:** In-depth documentation, API references, database schemas, comprehensive guides, or any detailed information that Codex should reference while working.
-
-### assets/
-Files not intended to be loaded into context, but rather used within the output Codex produces.
-
-**Examples from other skills:**
-- Brand styling: PowerPoint template files (.pptx), logo files
-- Frontend builder: HTML/React boilerplate project directories
-- Typography: Font files (.ttf, .woff2)
-
-**Appropriate for:** Templates, boilerplate code, document templates, images, icons, fonts, or any files meant to be copied or used in the final output.
-
----
-
-**Not every skill requires all three types of resources.**
+- Do not classify authorship or claim that a draft is AI-generated.
+- Do not use vocabulary blacklists or cosmetic “humanization.”
+- Do not treat StoryScope population tendencies as quality rules.
+- Do not auto-rewrite material decisions before human disposition.
+- Do not give presentation advice about typography, color, spacing, grid, alignment, visual hierarchy, icons, illustrations, slide masters, or visual style.
