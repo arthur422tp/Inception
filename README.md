@@ -2,7 +2,7 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-Inception contains `intent-preserving-default-auditor`, a Codex skill inspired by StoryScope's observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
+Inception contains `intent-preserving-default-auditor`, a Codex skill inspired by StoryScope's 📄 [arXiv Paper](https://arxiv.org/abs/2604.03136) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
 
 The first release supports:
 
@@ -26,6 +26,12 @@ intent
 ```
 
 The audit produces an evidence-backed Decision Ledger. Material changes cannot enter `revision` until the affected entries have an accepted or modified human decision. A clean draft may produce an empty ledger.
+
+### Example
+
+Suppose you provide a piece of presentation text and explain that “the audience is an engineering team, and the goal is to help them understand the limitations of this approach.” The skill will first identify decisions that could affect that intent—for example, whether the conclusion is overly neat or whether the claims are supported by evidence—and record them in the Decision Ledger.
+
+At that point, the skill will pause and wait for your decision. It will proceed to revision only after you mark an entry as `accepted` or `modified`, followed by a regression audit.
 
 ## Skill Layout
 

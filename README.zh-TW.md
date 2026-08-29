@@ -4,7 +4,7 @@
 
 Inception 包含 `intent-preserving-default-auditor`，這是一個受到 StoryScope 啟發而開發的 Codex skill。
 
-StoryScope 的核心觀察之一是：模型在生成內容時，經常會收斂到熟悉、常見或高機率的內容選擇。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
+StoryScope 📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)的核心觀察之一是：模型在生成內容時，經常會收斂到熟悉、常見或高機率的內容選擇。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
 第一個版本支援：
 
@@ -32,6 +32,10 @@ audit 會產生一份由證據支持的 **Decision Ledger**。
 任何 material change 在進入 `revision` 階段之前，相關的 ledger entry 都必須先取得人類的 `accepted` 或 `modified` decision。
 
 如果初始 draft 沒有發現需要處理的實質問題，Decision Ledger 可以是空的。
+
+### 小例子
+
+假設你提供一段簡報文字，並說明「受眾是工程團隊，希望他們理解這個方案的限制」。skill 會先找出可能影響這個意圖的決策，例如結論是否過度整齊、claim 是否有 evidence 支持，然後把它們記在 Decision Ledger 中。此時 skill 會停下來等待你的決定；只有在你對某個 entry 選擇 `accepted` 或 `modified` 後，才會進入 revision，最後再做 regression audit。
 
 ## Skill Layout
 
