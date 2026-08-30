@@ -29,14 +29,6 @@ The first release supports:
 
 Inception works with **OpenAI Codex** and **Anthropic Claude Code**.
 
-## Research inspiration
-
-StoryScope (📄 [arXiv paper](https://arxiv.org/abs/2604.03136)) observed in its research on AI fiction that AI-generated stories may be more likely to use neat, single-path plots and explain their themes too explicitly.
-
-Inception uses this kind of population-level observation as a reference for proposing audit hypotheses. It is not a writing rule for all content, and it does not mean that presentation text, document text, or social copy has the same level of research evidence.
-
-This skill **is not for detecting AI-generated content or making writing “look more human.”** Its purpose is to identify content decisions that may be influenced by default patterns, compare them with the author's original intent, and return decisions with real material impact to human judgment.
-
 ---
 
 ## What does Inception look for?
@@ -213,6 +205,16 @@ After the revision, Inception checks again:
 * whether the approved change was applied correctly;
 * whether the change went beyond the authorized scope;
 * whether it introduced a new problem or trade-off.
+
+---
+
+## Research inspiration
+
+StoryScope (📄 [arXiv paper](https://arxiv.org/abs/2604.03136)) observed in its research on AI fiction that AI-generated stories may be more likely to use neat, single-path plots and explain their themes too explicitly.
+
+Inception uses this kind of population-level observation as a reference for proposing audit hypotheses. It is not a writing rule for all content, and it does not mean that presentation text, document text, or social copy has the same level of research evidence.
+
+This skill **is not an AI detector or a cosmetic humanizer.** Its purpose is to identify content decisions that may be influenced by default patterns, compare them with the author's original intent, and return decisions with real material impact to human judgment.
 
 ---
 
