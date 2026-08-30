@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import NoReturn
 
-DOMAINS = frozenset({"fiction", "presentation_text", "document_text"})
+DOMAINS = frozenset({"fiction", "presentation_text", "document_text", "social_copy"})
 LEDGER_STATES = frozenset({
     "intent", "initial_draft", "domain_audit", "awaiting_human_decision",
     "revision", "regression_audit", "complete",
@@ -17,7 +17,7 @@ ENTRY_FIELDS = frozenset({
     "diagnostic_axis", "intent_relevance", "evidence", "alternatives",
     "recommendation", "human_decision", "revision", "regression",
 })
-SCOPE_KINDS = frozenset({"document", "section", "scene", "deck", "slide", "passage"})
+SCOPE_KINDS = frozenset({"document", "section", "scene", "deck", "slide", "post", "thread", "passage"})
 ACTIONS = frozenset({"keep", "revise", "remove", "investigate"})
 DECISION_STATUSES = frozenset({"pending", "accepted", "modified", "rejected", "deferred"})
 REVISION_STATUSES = frozenset({"not_started", "applied", "not_applicable"})

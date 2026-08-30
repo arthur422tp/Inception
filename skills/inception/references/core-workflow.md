@@ -55,7 +55,7 @@ Establish this contract before the audit:
 
 ```yaml
 intent:
-  domain: fiction | presentation_text | document_text
+  domain: fiction | presentation_text | document_text | social_copy
   audience: []
   desired_effect: []
   must_preserve: []
@@ -133,8 +133,8 @@ Accepted values:
 
 | Field | Values |
 |---|---|
-| `domain` | `fiction`, `presentation_text`, `document_text` |
-| `scope.kind` | `document`, `section`, `scene`, `deck`, `slide`, `passage` |
+| `domain` | `fiction`, `presentation_text`, `document_text`, `social_copy` |
+| `scope.kind` | `document`, `section`, `scene`, `deck`, `slide`, `post`, `thread`, `passage` |
 | recommendation/action | `keep`, `revise`, `remove`, `investigate` |
 | human status | `pending`, `accepted`, `modified`, `rejected`, `deferred` |
 | revision status | `not_started`, `applied`, `not_applicable` |
@@ -169,7 +169,7 @@ Complete only when every applied entry has passed and no material decision remai
 
 ## Large Artifacts
 
-Audit coherent units—such as acts, scene groups, deck sections, slide sequences, or document sections—rather than dumping an exhaustive checklist. Keep one Intent Contract and one ledger across units. Reuse entry IDs and cite cross-unit dependencies.
+Audit coherent units—such as acts, scene groups, deck sections, slide sequences, document sections, threads, or post series—rather than dumping an exhaustive checklist. Keep one Intent Contract and one ledger across units. Reuse entry IDs and cite cross-unit dependencies.
 
 ## Error Handling
 

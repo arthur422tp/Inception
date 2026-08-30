@@ -1,7 +1,7 @@
 {
   "name": "inception",
   "version": "0.1.0",
-  "description": "Intent-preserving audit and revision for fiction, presentation text, and document text. Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
+  "description": "Intent-preserving audit and revision for fiction, presentation text, document text, and organic social copy. Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
   "author": {
     "name": "arthur422tp",
     "url": "https://github.com/arthur422tp"
@@ -13,13 +13,14 @@
     "intent",
     "fiction",
     "presentation",
-    "document"
+    "document",
+    "social-copy"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Inception",
     "shortDescription": "Audit content defaults against author intent",
-    "longDescription": "Intent-preserving audit and revision for fiction, presentation text, and document text. Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
+    "longDescription": "Intent-preserving audit and revision for fiction, presentation text, document text, and organic social copy. Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
     "developerName": "arthur422tp",
     "category": "Writing",
     "websiteURL": "https://github.com/arthur422tp/Inception",

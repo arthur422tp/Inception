@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "inception",
   "version": "0.1.0",
-  "description": "Intent-preserving audit and revision for fiction, presentation text, and document text.",
+  "description": "Intent-preserving audit and revision for fiction, presentation text, document text, and organic social copy.",
   "owner": {
     "name": "arthur422tp",
     "url": "https://github.com/arthur422tp"

@@ -6,15 +6,16 @@ Inception
 
 本 repository 包含名為 `inception` 的 skill，已同時包裝成可供 OpenAI Codex 與 Anthropic Claude Code 原生安裝的 plugin。這是一個受到 StoryScope 啟發而開發的工具。
 
-StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)）在 AI fiction 的研究中觀察到，AI 生成故事可能較常採用整齊、單一路徑的情節並過度解釋主題。這個 skill 將這類 population-level observation 作為提出 audit hypotheses 的參考；它不是對所有內容的普遍寫作規則，也不代表 presentation text 或 document text 已有相同程度的研究證據。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
+StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)）在 AI fiction 的研究中觀察到，AI 生成故事可能較常採用整齊、單一路徑的情節並過度解釋主題。這個 skill 將這類 population-level observation 作為提出 audit hypotheses 的參考；它不是對所有內容的普遍寫作規則，也不代表 presentation text、document text 或 social copy 已有相同程度的研究證據。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
 第一個版本支援：
 
 - fiction（小說／虛構敘事）；
 - presentation text（簡報文字內容），包含整份簡報的論證架構、單張投影片的功能、claims 與 evidence；
-- document text（文件文字內容），包含 reports、proposals、memos、specifications、policies、SOPs 與 research summaries。
+- document text（文件文字內容），包含 reports、proposals、memos、specifications、policies、SOPs 與 research summaries；
+- social copy（社群文案），只涵蓋品牌／個人的自然貼文，包含 captions、posts、threads 與 post series。
 
-目前刻意排除簡報的視覺設計與文件格式操作，例如 typography、color、spacing、layout、pagination、tracked changes 與檔案操作。
+目前刻意排除付費廣告、社群平台成效最佳化、簡報的視覺設計與文件格式操作，例如 typography、color、spacing、layout、pagination、tracked changes 與檔案操作。
 
 ## Workflow
 
@@ -52,7 +53,8 @@ skills/inception/
 │   ├── core-workflow.md
 │   ├── document-text-adapter.md
 │   ├── fiction-adapter.md
-│   └── presentation-text-adapter.md
+│   ├── presentation-text-adapter.md
+│   └── social-copy-adapter.md
 └── scripts/validate_ledger.py
 ```
 
@@ -75,7 +77,7 @@ codex plugin marketplace add arthur422tp/Inception
 codex plugin add inception@inception
 ```
 
-安裝後可以使用 `$inception` 明確呼叫，也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction、presentation text 或 document text。
+安裝後可以使用 `$inception` 明確呼叫，也可以直接要求 Codex 根據你的 intent，audit 或 revise fiction、presentation text、document text 或品牌／個人的社群自然貼文。
 
 ### Anthropic Claude Code
 
@@ -158,4 +160,5 @@ python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_valida
 - 在人類完成 disposition 之前自動改寫內容；
 - 將 StoryScope 所觀察到的 population-level tendencies 視為適用於所有文本的普遍寫作規則；
 - 簡報的 visual presentation design；
-- 文件的 layout、file-format operations、tracked changes 或 comments。
+- 文件的 layout、file-format operations、tracked changes 或 comments；
+- 付費廣告、targeting、bidding、社群排程或 algorithm speculation。

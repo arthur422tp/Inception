@@ -10,9 +10,10 @@ The first release supports:
 
 - fiction;
 - presentation text, including deck argument, slide function, claims, and evidence;
-- document text, including reports, proposals, memos, specifications, policies, SOPs, and research summaries.
+- document text, including reports, proposals, memos, specifications, policies, SOPs, and research summaries;
+- organic brand and personal social copy, including captions, posts, threads, and post series.
 
-It intentionally excludes presentation visual design and document-format mechanics such as typography, color, spacing, layout, pagination, tracked changes, and file operations.
+It intentionally excludes paid advertising, social-platform optimization, presentation visual design, and document-format mechanics such as typography, color, spacing, layout, pagination, tracked changes, and file operations.
 
 ## Workflow
 
@@ -48,7 +49,8 @@ skills/inception/
 │   ├── core-workflow.md
 │   ├── document-text-adapter.md
 │   ├── fiction-adapter.md
-│   └── presentation-text-adapter.md
+│   ├── presentation-text-adapter.md
+│   └── social-copy-adapter.md
 └── scripts/validate_ledger.py
 ```
 
@@ -69,7 +71,7 @@ codex plugin marketplace add arthur422tp/Inception
 codex plugin add inception@inception
 ```
 
-Then invoke the skill with `$inception`, or ask Codex to audit or revise fiction, presentation text, or document text against your intent.
+Then invoke the skill with `$inception`, or ask Codex to audit or revise fiction, presentation text, document text, or an organic social post against your intent.
 
 ### Anthropic Claude Code
 
@@ -145,4 +147,5 @@ python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_valida
 - automatic rewriting before human disposition;
 - treating StoryScope's population-level tendencies as universal writing rules;
 - visual presentation design;
-- document layout, file-format operations, tracked changes, or comments.
+- document layout, file-format operations, tracked changes, or comments;
+- paid ads, targeting, bidding, social scheduling, or algorithm speculation.
