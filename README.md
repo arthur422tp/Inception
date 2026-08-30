@@ -2,9 +2,11 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-**Inception is a writing skill for reducing the “AI-like” patterns that often appear in model-generated content.**
+> **Inception is not a humanizer.** Humanizers edit the surface—word choice, syntax, and tone. Inception audits the decisions underneath the prose: whether a story has been made too tidy, a deck too certain, or a document too templated. It records only material choices in a Decision Ledger, waits for your decision, and checks the revision against your intent.
 
-This repository contains the `inception` skill, packaged for both OpenAI Codex and Anthropic Claude Code. It is inspired by StoryScope's (📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or make writing “look human.” It exposes potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
+If you want a draft that merely sounds more human, use a humanizer. If you want to see what the draft quietly decided for you—and keep control of those decisions—use Inception.
+
+This repository contains the `inception` skill, packaged for both OpenAI Codex and Anthropic Claude Code. It is inspired by StoryScope's (📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or rewrite by default. It surfaces potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
 
 The first release supports:
 
@@ -149,3 +151,7 @@ python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_valida
 - visual presentation design;
 - document layout, file-format operations, tracked changes, or comments;
 - paid ads, targeting, bidding, social scheduling, or algorithm speculation.
+
+## License
+
+MIT

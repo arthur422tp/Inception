@@ -2,7 +2,9 @@ Inception
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-**Inception 是一個用來減少 AI 生成內容中常見「AI 味」的 writing skill。**
+> **Inception 不是 humanizer。** humanizer 改的是表層：用詞、句法與語氣。Inception 審計的是文字底下的決策：小說是否被收得過度工整、簡報是否把不確定性抹平、文件是否套上模板。它只把真正有影響的選擇記進 Decision Ledger，先等你決定，再修訂，最後回頭檢查是否仍符合原始意圖。
+
+如果你要的是「聽起來更像人」的文字，請找 humanizer；如果你要知道 draft 在不知不覺中替你做了哪些選擇，並保留這些選擇的控制權，才用 Inception。
 
 本 repository 包含名為 `inception` 的 skill，已同時包裝成可供 OpenAI Codex 與 Anthropic Claude Code 原生安裝的 plugin。這是一個受到 StoryScope 啟發而開發的工具。
 
@@ -162,3 +164,7 @@ python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_valida
 - 簡報的 visual presentation design；
 - 文件的 layout、file-format operations、tracked changes 或 comments；
 - 付費廣告、targeting、bidding、社群排程或 algorithm speculation。
+
+## 授權
+
+MIT
