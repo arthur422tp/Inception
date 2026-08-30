@@ -2,54 +2,265 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-> Inception finds content choices that may make a draft feel predictable, over-explained, or too neat. It shows you what it found, explains why it might matter, and lets you decide what—if anything—to change.
+> **A writing skill that reduces “AI-like” or model-default patterns while preserving the author's intent.**
 
-It looks beyond word choice and tone. For example, Inception may flag a story that resolves every conflict too cleanly, a presentation that sounds more certain than its evidence, or a document that keeps restating the same idea through a familiar template.
+Inception looks beyond word choice and tone. It asks a more upstream question: **what content choices did the draft make?**
 
-This repository contains the `inception` skill, packaged for both OpenAI Codex and Anthropic Claude Code. It is inspired by StoryScope's (📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or rewrite by default. It surfaces potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
+It looks for decisions that may make writing feel overly polished, over-explained, predictable, repetitive, or more certain than the evidence supports.
 
-When the host supports subagents, the human-facing main agent delegates the audit to an independent reviewer. The reviewer receives the Intent Contract and draft, returns an evidence-backed Decision Ledger, and never revises the text. The main agent shows that result to the human and applies only accepted or modified actions. If independent review is unavailable, the main agent uses the same gated workflow and identifies the fallback.
+It does not rewrite the whole draft as soon as it finds a possible issue.
+
+Inception first tells you:
+
+* what it noticed;
+* why the choice may be worth examining;
+* how it relates to your original intent;
+* how you could change it;
+* what the change might cost.
+
+You decide which parts actually need to change.
 
 The first release supports:
 
-- fiction;
-- presentation text, including deck argument, slide function, claims, and evidence;
-- document text, including reports, proposals, memos, specifications, policies, SOPs, and research summaries;
-- organic brand and personal social copy, including captions, posts, threads, and post series.
+* fiction and narrative writing;
+* presentation text, including deck argument, slide function, claims, and evidence;
+* document text, including reports, proposals, memos, specifications, policies, SOPs, and research summaries;
+* organic brand and personal social copy, including captions, posts, threads, and post series.
 
-It intentionally excludes paid advertising, social-platform optimization, presentation visual design, and document-format mechanics such as typography, color, spacing, layout, pagination, tracked changes, and file operations.
+Inception works with **OpenAI Codex** and **Anthropic Claude Code**.
 
-## Workflow
+---
 
-Every audit uses the same gated sequence:
+## What does Inception look for?
+
+Many humanizers mainly operate on surface-level writing, such as:
+
+* swapping words;
+* changing sentence length;
+* removing clichés;
+* making the tone more conversational;
+* making sentence patterns less regular.
+
+These techniques can sometimes help.
+
+But many features that make writing feel “AI-like” appear further upstream.
+
+Inception looks beyond:
 
 ```text
-intent
-  → initial_draft
-  → domain_audit
-  → awaiting_human_decision
-  → revision
-  → regression_audit
-  → complete
+How is this sentence written?
 ```
 
-The audit produces an evidence-backed Decision Ledger. Material changes cannot enter `revision` until the affected entries have an accepted or modified human decision. A clean draft may produce an empty ledger.
+It also asks:
 
-The actors are deliberately separated:
+```text
+Why was this choice made here?
+Does this information need to be here?
+Does this conclusion need to be this complete?
+Does this point need to be made again?
+Is the claim as certain as the evidence supports?
+```
 
-- the main agent captures intent, creates or receives the draft, presents review results, and applies approved revisions;
-- the audit reviewer performs `domain_audit` and `regression_audit` without rewriting or approving its own recommendations;
-- the human accepts, modifies, rejects, or defers every material finding.
+---
 
-Review dispatch may be automatic, but content decisions are not. Reviewer results always return to the human; the reviewer and writer never run a private revision loop.
+## Examples
 
-### Example
+### Fiction
 
-Suppose you ask the main agent to draft a piece of presentation text and explain that “the audience is an engineering team, and the goal is to help them understand the limitations of this approach.” After creating the draft, the main agent sends the Intent Contract and draft to an independent reviewer when one is available. The reviewer identifies decisions that could affect that intent—for example, whether the conclusion is overly neat or whether the claims are supported by evidence—and records them in the Decision Ledger.
+Every conflict in a story is resolved through the protagonist's growth, understanding, and reconciliation, and the ending explicitly says what the protagonist “learned.”
 
-The main agent then shows you the ledger and pauses. It proceeds to revision only after you mark an entry as `accepted` or `modified`. A reviewer checks the resulting change, and that Regression Audit also comes back to you before any additional revision pass.
+Inception may point out:
 
-## Skill Layout
+* whether the ending is too neat;
+* whether the theme is explained too completely;
+* whether every conflict is being closed through the same resolution mechanism.
+
+It does not decide that these patterns are wrong just because they are common in model outputs.
+
+If the work is meant to be a fable, a healing story, or a story that needs clear closure, keeping them may be the right choice.
+
+---
+
+### Presentations
+
+A presentation repeats the same conclusion across several slides and becomes increasingly certain, even though the evidence supports a more cautious claim.
+
+Inception may point out:
+
+* whether multiple slides are performing the same argument function;
+* whether claim strength exceeds the evidence;
+* whether the conclusion is stronger than the original intent.
+
+---
+
+### Documents
+
+A proposal explains the same rationale again and again in the Executive Summary, Background, Recommendation, and Conclusion.
+
+Inception does not just rewrite the four passages with different sentence patterns.
+
+It first asks:
+
+> Does this reason really need to be represented four times?
+
+In other words, it checks the **representation decision**, not just the wording.
+
+---
+
+### Social copy
+
+A post naturally falls into this familiar sequence:
+
+```text
+hook
+→ problem
+→ personal experience
+→ three takeaways
+→ positive takeaway
+```
+
+If the author's intent was a cooler, more observational voice without a clear conclusion, Inception may flag this familiar structure as a content choice worth reconsidering.
+
+It does not force the writing to become conversational or deliberately messy just because it does not “sound human” enough.
+
+---
+
+## Why not use a regular humanizer?
+
+Most humanizers mainly operate on:
+
+```text
+word choice
+sentence structure
+tone
+register
+```
+
+Inception works further upstream:
+
+```text
+content selection
+argument structure
+narrative resolution
+claim strength
+repetition
+emphasis
+explanation
+```
+
+Inception is not trying to make every piece of writing unusual, strange, or unpredictable.
+
+Familiar choices are not automatically bad.
+
+Unusual choices are not automatically better.
+
+The real question is:
+
+> **Is this choice serving the author's intent, or is it simply the easiest default for a model to choose?**
+
+For example:
+
+* linear storytelling may be exactly what a children's story needs;
+* a clear conclusion may be exactly what a policy document needs;
+* repeating a key message in a presentation may be deliberate;
+* a highly structured format may be exactly what an SOP needs.
+
+Inception does not treat “common” as a synonym for “defective.”
+
+It treats these patterns as **decision candidates worth examining**.
+
+---
+
+## How does it work?
+
+From the user's perspective, the process is simple:
+
+```text
+Draft
+  → Audit
+  → You decide
+  → Revision
+  → Check
+```
+
+Inception first confirms:
+
+> What is this piece of writing trying to achieve?
+
+Only then does it examine the draft's content decisions.
+
+If it finds important choices that may conflict with the intent, it returns them to you first.
+
+You can:
+
+* accept them;
+* modify the recommendation;
+* reject them;
+* defer them.
+
+Only decisions that you accept or modify can enter revision.
+
+After the revision, Inception checks again:
+
+* whether the approved change was applied correctly;
+* whether the change went beyond the authorized scope;
+* whether it introduced a new problem or trade-off.
+
+---
+
+## A complete example
+
+Suppose you are preparing a presentation for an engineering team.
+
+Your intent is:
+
+```text
+Audience:
+Engineering team
+
+Goal:
+Help the team understand the limitations of the current approach
+
+Must preserve:
+Technical accuracy
+Known uncertainty
+Existing evidence
+
+Must avoid:
+Overstating the conclusion
+```
+
+The draft might contain this sentence:
+
+> This architecture solves the scalability problem and provides a reliable foundation for future growth.
+
+But the current evidence has only been tested in a limited set of situations.
+
+Inception might return:
+
+```text
+Observed choice:
+The conclusion describes the architecture as having fully solved the scalability problem.
+
+Why it matters:
+The original intent requires the limitations and uncertainty to remain visible.
+
+Possible alternatives:
+- Keep the original sentence;
+- narrow the claim to what the current evidence supports;
+- distinguish verified results from expected future benefits.
+
+Recommendation:
+Revise.
+```
+
+You still decide whether to accept the recommendation.
+
+Inception does not silently change the original sentence and then tell you it has been “optimized.”
+
+---
+
+## Skill layout
 
 The project-local skill is stored at:
 
@@ -67,62 +278,72 @@ skills/inception/
 └── scripts/validate_ledger.py
 ```
 
-`SKILL.md` loads the Core workflow, the Reviewer Protocol, and exactly one domain adapter. Detailed guidance remains in references so unrelated domains do not consume context.
+`SKILL.md` loads the Core workflow, the Reviewer Protocol, and **exactly one** domain adapter.
 
-## Install and Discover the Skill
+More detailed domain-specific guidance remains in `references/`, so unrelated domain documents do not consume context for the current task.
 
-The repository is the single source of truth. The Codex and Claude Code packages both load the same `skills/inception/SKILL.md`; neither package contains a duplicate skill implementation.
+---
 
-The integration metadata is kept at the repository root: `.codex-plugin/plugin.json` and `.agents/plugins/marketplace.json` for Codex, plus `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` for Claude Code.
+## Install and discover the skill
+
+The repository is the single source of truth for this skill. The Codex and Claude Code packages both load the same `skills/inception/SKILL.md`; neither package contains a separate copy of the skill implementation.
+
+Integration metadata is kept at the repository root: Codex uses `.codex-plugin/plugin.json` and `.agents/plugins/marketplace.json`, while Claude Code uses `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`.
 
 ### OpenAI Codex
 
-Add the repository marketplace and install the plugin:
+Add the repository marketplace, then install the plugin:
 
 ```bash
 codex plugin marketplace add arthur422tp/Inception
 codex plugin add inception@inception
 ```
 
-Then invoke the skill with `$inception`, or ask Codex to audit or revise fiction, presentation text, document text, or an organic social post against your intent.
+After installation, invoke it explicitly with `$inception`, or ask Codex to audit or revise fiction, presentation text, document text, or organic brand and personal social copy against your intent.
 
 ### Anthropic Claude Code
 
-Add the repository marketplace and install the plugin:
+Add the repository marketplace, then install the plugin:
 
 ```bash
 claude plugin marketplace add arthur422tp/Inception
 claude plugin install inception@inception
 ```
 
-Inside an interactive Claude Code session, the equivalent commands are:
+Inside an interactive Claude Code session, you can use these equivalent commands:
 
 ```text
 /plugin marketplace add arthur422tp/Inception
 /plugin install inception@inception
 ```
 
-The skill is available under the plugin namespace as `/inception:inception`. For local development, load the repository directly with `claude --plugin-dir .`.
+After installation, the skill is available under the plugin namespace `/inception:inception`. For local development, load the current repository directly with `claude --plugin-dir .`.
 
 ### Manual Codex skill development
 
-For local development or older Codex setups that do not support plugin marketplaces, copy or link the skill folder into `~/.codex/skills/`:
+For local development or older Codex versions without plugin marketplace support, copy or link the skill folder into `~/.codex/skills/`:
 
 ```bash
 cp -R skills/inception ~/.codex/skills/
 ```
 
-Or, while developing locally:
+Or use a symbolic link while developing locally:
 
 ```bash
 ln -s "$(pwd)/skills/inception" ~/.codex/skills/inception
 ```
 
-After installation, invoke it explicitly with `$inception`.
+After installation, invoke it explicitly with:
+
+```text
+$inception
+```
+
+---
 
 ## Validate a Decision Ledger
 
-Ledger files use JSON so their gates can be checked deterministically:
+Decision Ledgers use JSON, so workflow gates can be checked deterministically:
 
 ```bash
 .venv/bin/python skills/inception/scripts/validate_ledger.py \
@@ -135,9 +356,11 @@ Expected output:
 valid: tests/fixtures/valid-ledger.json
 ```
 
-Invalid input exits with a non-zero status and reports the exact field path.
+Invalid input exits with a non-zero status and reports the exact field path where the problem occurred.
 
-## Run Tests
+---
+
+## Run tests
 
 The Python utilities use only the Python 3.11 standard library:
 
@@ -145,21 +368,24 @@ The Python utilities use only the Python 3.11 standard library:
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-Validate the skill folder itself with the Codex skill-creator utility:
+You can also use Codex's `skill-creator` utility to validate the skill folder itself:
 
 ```bash
 python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
   skills/inception
 ```
 
+---
 
-## Non-Goals
+## Non-goals
+
+This project is not intended for:
 
 - AI-source detection or authorship scoring;
-- word blacklists or cosmetic humanization;
+- word blacklists or other cosmetic humanization techniques;
 - automatic rewriting before human disposition;
 - autonomous reviewer-to-writer revision loops;
-- treating StoryScope's population-level tendencies as universal writing rules;
+- treating StoryScope's population-level tendencies as universal writing rules for all text;
 - visual presentation design;
 - document layout, file-format operations, tracked changes, or comments;
 - paid ads, targeting, bidding, social scheduling, or algorithm speculation.
