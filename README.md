@@ -2,9 +2,9 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-> **Inception is not a humanizer.** Humanizers edit the surface—word choice, syntax, and tone. Inception audits the decisions underneath the prose: whether a story has been made too tidy, a deck too certain, or a document too templated. It records only material choices in a Decision Ledger, waits for your decision, and checks the revision against your intent.
+> Inception finds content choices that may make a draft feel predictable, over-explained, or too neat. It shows you what it found, explains why it might matter, and lets you decide what—if anything—to change.
 
-If you want a draft that merely sounds more human, use a humanizer. If you want to see what the draft quietly decided for you—and keep control of those decisions—use Inception.
+It looks beyond word choice and tone. For example, Inception may flag a story that resolves every conflict too cleanly, a presentation that sounds more certain than its evidence, or a document that keeps restating the same idea through a familiar template.
 
 This repository contains the `inception` skill, packaged for both OpenAI Codex and Anthropic Claude Code. It is inspired by StoryScope's (📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or rewrite by default. It surfaces potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
 
