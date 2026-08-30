@@ -45,7 +45,7 @@ Inception 將這類 population-level observation 作為提出 audit hypotheses �
 
 * 換詞；
 * 調整句長；
-* 移除 cliché；
+* 移除陳腔濫調；
 * 把語氣改得比較口語；
 * 讓句型不要那麼規律。
 
