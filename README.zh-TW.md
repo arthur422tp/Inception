@@ -2,11 +2,13 @@ Inception
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-> **Inception 不是 humanizer。** humanizer 改的是表層：用詞、句法與語氣。Inception 審計的是文字底下的決策：小說是否被收得過度工整、簡報是否把不確定性抹平、文件是否套上模板。它只把真正有影響的選擇記進 Decision Ledger，先等你決定，再修訂，最後回頭檢查是否仍符合原始意圖。
+> Inception 會找出可能讓草稿顯得過度工整、解釋太滿或充滿模板感的內容選擇。 它會告訴你發現了什麼、可能造成什麼影響，再由你決定要不要修改。
 
-如果你要的是「聽起來更像人」的文字，請找 humanizer；如果你要知道 draft 在不知不覺中替你做了哪些選擇，並保留這些選擇的控制權，才用 Inception。
+它檢查的不只是用詞與語氣。例如，Inception 可能會指出一篇故事把所有衝突收得太乾淨、一份簡報講得比證據更肯定，或一份文件不斷透過熟悉的模板重述同一件事。
 
-本 repository 包含名為 `inception` 的 skill，已同時包裝成可供 OpenAI Codex 與 Anthropic Claude Code 原生安裝的 plugin。這是一個受到 StoryScope 啟發而開發的工具。
+這些模式只是值得檢查的線索，不代表寫法一定不好。Inception 會將它們與你的受眾、目的和限制比較，只列出可能真正影響原始意圖的選擇。
+
+Inception 不會判定一段文字是不是由 AI 撰寫，也不會未經同意就改寫重要內容。它會先將發現記入 Decision Ledger，等你決定後才進行修訂，最後再檢查修改結果是否偏離原始意圖。
 
 StoryScope （📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)）在 AI fiction 的研究中觀察到，AI 生成故事可能較常採用整齊、單一路徑的情節並過度解釋主題。這個 skill 將這類 population-level observation 作為提出 audit hypotheses 的參考；它不是對所有內容的普遍寫作規則，也不代表 presentation text、document text 或 social copy 已有相同程度的研究證據。這個 skill **不是用來偵測 AI 生成內容，也不是要讓文字「看起來更像人寫的」**。它的目的是找出可能受到預設模式（default-driven choices）影響的內容決策，將這些決策與作者原本的意圖進行比較，並把真正具有實質影響的決策交還給人類判斷。
 
