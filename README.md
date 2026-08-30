@@ -8,6 +8,8 @@ It looks beyond word choice and tone. For example, Inception may flag a story th
 
 This repository contains the `inception` skill, packaged for both OpenAI Codex and Anthropic Claude Code. It is inspired by StoryScope's (📄 [arXiv Paper](https://arxiv.org/abs/2604.03136)) observation that models often converge on familiar content decisions. The skill does not detect AI authorship or rewrite by default. It surfaces potentially default-driven choices, compares them with the author's intent, and returns material decisions to the human.
 
+When the host supports subagents, the human-facing main agent delegates the audit to an independent reviewer. The reviewer receives the Intent Contract and draft, returns an evidence-backed Decision Ledger, and never revises the text. The main agent shows that result to the human and applies only accepted or modified actions. If independent review is unavailable, the main agent uses the same gated workflow and identifies the fallback.
+
 The first release supports:
 
 - fiction;
@@ -33,11 +35,19 @@ intent
 
 The audit produces an evidence-backed Decision Ledger. Material changes cannot enter `revision` until the affected entries have an accepted or modified human decision. A clean draft may produce an empty ledger.
 
+The actors are deliberately separated:
+
+- the main agent captures intent, creates or receives the draft, presents review results, and applies approved revisions;
+- the audit reviewer performs `domain_audit` and `regression_audit` without rewriting or approving its own recommendations;
+- the human accepts, modifies, rejects, or defers every material finding.
+
+Review dispatch may be automatic, but content decisions are not. Reviewer results always return to the human; the reviewer and writer never run a private revision loop.
+
 ### Example
 
-Suppose you provide a piece of presentation text and explain that “the audience is an engineering team, and the goal is to help them understand the limitations of this approach.” The skill will first identify decisions that could affect that intent—for example, whether the conclusion is overly neat or whether the claims are supported by evidence—and record them in the Decision Ledger.
+Suppose you ask the main agent to draft a piece of presentation text and explain that “the audience is an engineering team, and the goal is to help them understand the limitations of this approach.” After creating the draft, the main agent sends the Intent Contract and draft to an independent reviewer when one is available. The reviewer identifies decisions that could affect that intent—for example, whether the conclusion is overly neat or whether the claims are supported by evidence—and records them in the Decision Ledger.
 
-At that point, the skill will pause and wait for your decision. It will proceed to revision only after you mark an entry as `accepted` or `modified`, followed by a regression audit.
+The main agent then shows you the ledger and pauses. It proceeds to revision only after you mark an entry as `accepted` or `modified`. A reviewer checks the resulting change, and that Regression Audit also comes back to you before any additional revision pass.
 
 ## Skill Layout
 
@@ -52,11 +62,12 @@ skills/inception/
 │   ├── document-text-adapter.md
 │   ├── fiction-adapter.md
 │   ├── presentation-text-adapter.md
+│   ├── reviewer-protocol.md
 │   └── social-copy-adapter.md
 └── scripts/validate_ledger.py
 ```
 
-`SKILL.md` loads the Core workflow and exactly one domain adapter. Detailed guidance remains in references so unrelated domains do not consume context.
+`SKILL.md` loads the Core workflow, the Reviewer Protocol, and exactly one domain adapter. Detailed guidance remains in references so unrelated domains do not consume context.
 
 ## Install and Discover the Skill
 
@@ -147,6 +158,7 @@ python3 /Users/arthuryu/.codex/skills/.system/skill-creator/scripts/quick_valida
 - AI-source detection or authorship scoring;
 - word blacklists or cosmetic humanization;
 - automatic rewriting before human disposition;
+- autonomous reviewer-to-writer revision loops;
 - treating StoryScope's population-level tendencies as universal writing rules;
 - visual presentation design;
 - document layout, file-format operations, tracked changes, or comments;

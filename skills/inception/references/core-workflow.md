@@ -5,6 +5,7 @@
 - Core rule
 - Inception meta-intent
 - State machine
+- Execution roles
 - Intent Contract
 - Audit procedure
 - Decision Ledger contract
@@ -48,6 +49,18 @@ Allow only these recovery transitions:
 - `regression_audit → awaiting_human_decision` when revision exposes a new material trade-off.
 
 Never move directly from `domain_audit` to `revision`.
+
+## Execution Roles
+
+Map the state machine to three owners:
+
+- The human-facing main agent owns `intent`, `initial_draft`, presentation of review results, and human-authorized `revision`.
+- An independent audit reviewer owns `domain_audit` and `regression_audit` when subagents are available.
+- The human owns every material Decision Ledger disposition and decides whether another revision pass may begin after a reviewer reports back.
+
+Follow the Reviewer Protocol for dispatch inputs, reviewer outputs, context isolation, fallback behavior, and regression handoff. A delegated reviewer must not recursively dispatch another reviewer. When independent review is unavailable, the main agent may audit in the same context but must identify that fallback to the human.
+
+Every reviewer result returns through the main agent to the human. Never run a private reviewer-to-writer revision loop. The actors may change while the ordered states and human-decision gate remain unchanged.
 
 ## Intent Contract
 
@@ -153,6 +166,8 @@ Present candidates in priority order with concise alternatives and trade-offs. A
 - `pending`: stop before revision.
 
 Revise only the scope authorized by accepted or modified entries. Record the artifact reference and a factual summary of the change.
+
+The main agent must not accept a reviewer's recommendation for the human. After a Regression Audit, present the result to the human before starting another revision pass, including when the reviewer reports that an already authorized change was applied incompletely.
 
 ## Regression Audit
 

@@ -16,17 +16,19 @@ Invoking Inception establishes a baseline meta-intent to reduce perceived model-
 ## Required Workflow
 
 1. Read [references/core-workflow.md](references/core-workflow.md) completely.
-2. Establish the Intent Contract before judging the draft.
-3. Obtain the user's draft or help create an initial draft. Send both through the same later states.
-4. Select exactly one adapter and read it completely:
+2. Read [references/reviewer-protocol.md](references/reviewer-protocol.md) completely.
+3. Establish the Intent Contract before judging the draft.
+4. Obtain the user's draft or help create an initial draft. Send both through the same later states.
+5. Select exactly one adapter and read it completely:
    - Fiction, story, scene, or narrative → [references/fiction-adapter.md](references/fiction-adapter.md)
    - Deck, slide, presentation copy, or speaker-facing argument → [references/presentation-text-adapter.md](references/presentation-text-adapter.md)
    - Report, proposal, memo, specification, policy, SOP, or other sustained document text → [references/document-text-adapter.md](references/document-text-adapter.md)
    - Organic brand or personal social post, caption, thread, or post series → [references/social-copy-adapter.md](references/social-copy-adapter.md)
-5. Audit observable choices against intent. Create only evidence-backed Decision Ledger entries.
-6. Present the ledger and stop for human decisions. Do not materially revise while any affected entry remains pending, rejected, or deferred.
-7. Apply only accepted or modified actions.
-8. Run the Regression Audit against affected intent constraints and dependencies. Surface any new trade-off for a human decision.
+6. If acting as the human-facing main agent, dispatch an independent audit reviewer when subagents are available. Otherwise perform a clearly identified same-agent fallback audit. Do not simulate an independent reviewer.
+7. If explicitly dispatched as the audit reviewer, do not dispatch another reviewer. Audit observable choices against intent and return only the evidence-backed review result required by the reviewer protocol.
+8. Present the ledger to the human and stop for decisions. Do not materially revise while any affected entry remains pending, rejected, or deferred.
+9. Apply only accepted or modified actions in the main-agent role.
+10. Run the Regression Audit through the reviewer protocol. Present its result to the human before any additional revision pass, and surface every new material trade-off for a human decision.
 
 For an unsupported domain, explain that no adapter exists and stop. Do not borrow the nearest adapter's assumptions.
 
