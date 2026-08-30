@@ -50,6 +50,16 @@ Also identify the Inception skill to load when it is not already discoverable. D
 
 If the reviewer returns an invalid persisted ledger, return the validator errors for correction without prescribing substantive findings. If reviewer correction is unavailable, the main agent may repair structural serialization errors only; it must not invent or materially alter findings.
 
+### Fiction-specific handling
+
+For `domain: fiction`, the audit reviewer must read the core workflow, the complete fiction adapter, and the complete [StoryScope feature registry](storyscope-features.md). The registry is for feature-level inspection only. It does not replace the ten fiction diagnostic axes, create a finding quota, or add fields to the ledger.
+
+Before creating any Decision Ledger candidate, the reviewer must cluster co-occurring features, deduplicate observations that describe the same choice, and synthesize the relevant upstream narrative decision. The reviewer returns material decisions, not a feature inventory. A feature ID may be used in working analysis, but any persisted trace must use the existing `observed_choice`, `suspected_default`, `diagnostic_axis`, and `evidence` fields; do not add a ledger key.
+
+Do not recommend `remove` or `revise` merely because a choice is AI-elevated, and do not treat a human-elevated value as a revision proposal. Do not produce a fixed number of findings. An empty ledger is valid. Every proposed decision should include a credible rationale for keeping the current choice and clearly state the trade-offs of the available alternative. If there is no evidence-backed material tension with the Intent Contract, return no candidate.
+
+These rules preserve the existing Audit Dispatch Contract, role permissions, state ownership, domain values, and ledger schema.
+
 ## Fallback
 
 When the current environment cannot create an independent subagent, keep the same state machine and perform the audit in the main context. Tell the human that independent review was unavailable. Do not claim role separation or fabricate reviewer output.

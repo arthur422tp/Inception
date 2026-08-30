@@ -4,6 +4,7 @@
 
 - Scope and evidence
 - Candidate recipe
+- StoryScope feature aggregation
 - Diagnostic axes
 - Cross-scene audit
 - Revision priorities
@@ -12,6 +13,8 @@
 ## Scope and Evidence
 
 Audit narrative decisions, not literary worth in the abstract. StoryScope findings describe population tendencies and supply hypotheses for inspection; they are not thresholds, prohibitions, or proof of AI authorship.
+
+Before a fiction audit, read [storyscope-features.md](storyscope-features.md) completely. Use it as the feature registry and evidence layer alongside this adapter. The existing ten Diagnostic Axes remain the human-readable, intent-facing architecture; the 30 features are atomic inspection cues and do not replace those axes.
 
 Evaluate choices at document, section, scene, and passage scope. Cite the smallest passage that demonstrates the choice, then check its earlier setup and later consequences when necessary.
 
@@ -27,6 +30,36 @@ Observed choice → draft evidence → suspected default → intent relationship
 Include a plausible reason to keep the current choice. If the only argument for change is that a choice is common, do not create an entry.
 
 Apply Inception's baseline meta-intent through observable narrative decisions without asking the user to restate it. Do not infer authorship. Do not treat genre conventions, linear chronology, closure, explicit emotion, or familiar imagery as defects by themselves.
+
+## StoryScope Feature Aggregation
+
+Inspect the registry features in this order:
+
+```text
+30 atomic features
+  → co-occurring configuration or cluster
+  → upstream narrative decision
+  → relationship to Intent Contract
+  → materiality check
+  → Decision Ledger candidate
+```
+
+Do not turn every detected feature into a ledger entry or scan for 30 warnings. First cluster co-occurring features, deduplicate overlapping observations, and synthesize the upstream narrative decision they may express. When several features arise from one authorial choice, merge them into one candidate at the highest useful scope. When one feature appears in multiple places but performs the same narrative function, prefer one cross-scene or whole-story candidate. A single feature may stand alone only when it already creates a material conflict with the Intent Contract. If evidence is insufficient, intent relevance is absent, or the only reason to flag the choice is a population tendency, do not create an entry.
+
+For example:
+
+```text
+thematic explicitness
++ narratorial thematic commentary
++ philosophical dialogue
++ unusually unified subplot functions
+→ possible upstream decision:
+  the story repeatedly closes interpretive space around one stated lesson
+```
+
+This cluster still requires an Intent Contract and a materiality check. For a fable, teaching story, children’s story, or deliberately blunt satire, the credible recommendation may be `keep`.
+
+Treat familiar structure as a choice, not a defect. Linear chronology, explicit emotion, named references, ambiguity, subplots, direct reader address, and other registry values may all serve the work. Do not mechanically add nonlinear chronology, moral ambiguity, fourth-wall breaks, subplots, explicit references, or more locations to increase dispersion. Do not use synonym replacement, deliberate roughening, forced informality, or an invented personal voice as a substitute for changing a narrative decision.
 
 ## Diagnostic Axes
 
@@ -112,14 +145,16 @@ The common choice can serve intent in ritual structures, comedy with variation, 
 
 ## Cross-Scene Audit
 
-After local candidates are found, check:
+After feature clustering and local candidates are found, check:
 
+- whether feature observations have been clustered and deduplicated before candidate synthesis;
+- whether multiple features are consequences of one upstream narrative decision;
 - whether two entries describe one upstream structural decision;
 - whether changing one scene would break setup or payoff elsewhere;
 - whether apparent repetition is escalation or redundancy;
 - whether a proposed unusual alternative violates genre, audience, length, or desired-effect constraints.
 
-Merge duplicates into the highest useful scope. Record dependencies before human review.
+Merge duplicates into the highest useful scope. Record dependencies before human review, and return only material decisions rather than a feature inventory.
 
 ## Revision Priorities
 
