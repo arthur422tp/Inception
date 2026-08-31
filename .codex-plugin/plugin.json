@@ -1,7 +1,7 @@
 {
   "name": "inception",
-  "version": "0.4.0",
-  "description": "Make AI-assisted fiction, presentations, documents, and organic social posts less generic, formulaic, repetitive, over-explained, or unsupported without losing the author's intent.",
+  "version": "0.5.0",
+  "description": "Reduce AI-like feature convergence in fiction, presentations, documents, and organic social posts while preserving the author's intent.",
   "author": {
     "name": "arthur422tp",
     "url": "https://github.com/arthur422tp"
@@ -19,8 +19,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Inception",
-    "shortDescription": "Make AI-assisted writing less generic without losing intent",
-    "longDescription": "Find generic, formulaic, repetitive, over-explained, or unsupported content decisions in fiction, presentations, documents, and organic social posts. Preserve the author's intent and wait for human decisions before material revision.",
+    "shortDescription": "Reduce AI-like patterns without losing author intent",
+    "longDescription": "Surface model-default feature clusters and structural options that reduce perceived AI-likeness in fiction, presentations, documents, and organic social posts. Calibrate every finding against author intent and wait for human decisions before material revision.",
     "developerName": "arthur422tp",
     "category": "Writing",
     "capabilities": [
@@ -29,7 +29,7 @@
     ],
     "websiteURL": "https://github.com/arthur422tp/Inception",
     "defaultPrompt": [
-      "Review this draft for generic, formulaic, over-explained, repetitive, or unsupported content choices. Show me only the most important decisions and wait before revising."
+      "Use $inception to review this draft for AI-like feature clusters and intent conflicts. Show me only the most important decisions and wait before revising."
     ]
   }
 }

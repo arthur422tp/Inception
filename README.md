@@ -2,11 +2,11 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-> **Make AI-assisted writing less generic without losing what you meant.**
+> **Reduce AI-like patterns without losing what you meant.**
 
-Inception is for drafts that feel formulaic, over-explained, repetitive, too neatly resolved, or more certain than their evidence. It looks beyond word choice and tone and asks a more upstream question: **what content choices did the draft make?**
+Inception gives equal weight to two goals: reducing perceived AI-like convergence and preserving author intent. It is for drafts that feel formulaic, over-explained, repetitive, too neatly resolved, or more certain than their evidence.
 
-It looks for decisions that may make writing feel overly polished, over-explained, predictable, repetitive, or more certain than the evidence supports.
+It looks beyond word choice and tone, clusters co-occurring model-default features into upstream content decisions, and explains how those clusters create the effect. It then compares each decision with the author's purpose and constraints before proposing structural alternatives.
 
 It does not rewrite the whole draft as soon as it finds a possible issue.
 
@@ -32,8 +32,8 @@ Inception works with **OpenAI Codex** and **Anthropic Claude Code**.
 ## Try it in 30 seconds
 
 ```text
-Use $inception to review this draft for generic, formulaic,
-over-explained, repetitive, or unsupported content choices.
+Use $inception to review this draft for AI-like feature clusters
+and intent conflicts.
 Show me only the three most important decisions and wait before revising.
 ```
 

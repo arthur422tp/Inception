@@ -1,4 +1,4 @@
 interface:
   display_name: "Inception"
-  short_description: "Make AI-assisted writing less generic without losing intent"
-  default_prompt: "Use $inception to review this draft for generic, formulaic, over-explained, repetitive, or unsupported content choices. Show me only the most important decisions and wait before revising."
+  short_description: "Reduce AI-like patterns without losing author intent"
+  default_prompt: "Use $inception to review this draft for AI-like feature clusters and intent conflicts. Show me only the most important decisions and wait before revising."

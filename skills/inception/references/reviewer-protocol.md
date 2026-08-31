@@ -20,7 +20,7 @@ Never create an autonomous reviewer-to-writer revision loop.
 6. Apply only human-accepted or human-modified actions.
 7. Present every Regression Audit result to the human before another revision pass.
 
-The main agent may add navigation or explain the ledger format. It must preserve the substance of each observed choice, evidence item, alternative, trade-off, and recommendation.
+The main agent may add navigation or explain the ledger format. It must preserve both analytical halves: the feature cluster and convergence effect, and the cluster's relationship to intent. It must also preserve the substance of each observed choice, evidence item, alternative, trade-off, and recommendation.
 
 ### Audit Reviewer
 
@@ -28,6 +28,8 @@ Load Inception's core workflow and exactly one selected domain adapter. Use the 
 
 - an `intent_gap` identifying the missing decision-relevant information; or
 - a Decision Ledger in `awaiting_human_decision`, including an empty ledger when no material finding exists.
+
+For every material entry, preserve a concise trace from observable feature cues to their cluster, convergence effect, upstream decision, and intent relationship in the existing ledger fields. Include a credible keep alternative and, when recommending change, a structural alternative that disrupts the identified pattern. Do not turn the trace into a feature inventory or add ledger fields.
 
 Do not revise the artifact, dispose ledger entries, speak on the human's behalf, or dispatch another reviewer.
 
@@ -56,7 +58,7 @@ If the reviewer returns an invalid persisted ledger, return the validator errors
 
 For `domain: fiction`, the audit reviewer must read the core workflow, the complete fiction adapter, and the complete [StoryScope feature registry](storyscope-features.md). The registry is for feature-level inspection only. It does not replace the ten fiction diagnostic axes, create a finding quota, or add fields to the ledger.
 
-Before creating any Decision Ledger candidate, the reviewer must cluster co-occurring features, deduplicate observations that describe the same choice, and synthesize the relevant upstream narrative decision. The reviewer returns material decisions, not a feature inventory. A feature ID may be used in working analysis, but any persisted trace must use the existing `observed_choice`, `suspected_default`, `diagnostic_axis`, and `evidence` fields; do not add a ledger key.
+Before creating any Decision Ledger candidate, the reviewer must cluster co-occurring features, deduplicate observations that describe the same choice, and synthesize the relevant upstream narrative decision. The reviewer returns material decisions rather than a feature inventory, but keeps the feature-to-cluster reasoning visible in concise human-readable form. A feature ID may be used in working analysis, but any persisted trace must use the existing `observed_choice`, `suspected_default`, `diagnostic_axis`, and `evidence` fields; do not add a ledger key.
 
 Do not recommend `remove` or `revise` merely because a choice is AI-elevated, and do not treat a human-elevated value as a revision proposal. Do not produce a fixed number of findings. An empty ledger is valid. Every proposed decision should include a credible rationale for keeping the current choice and clearly state the trade-offs of the available alternative. If there is no evidence-backed material tension with the Intent Contract, return no candidate.
 

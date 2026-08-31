@@ -18,15 +18,15 @@
 
 ## Core Rule
 
-Judge whether an observable content choice serves the stated intent. A familiar choice is not automatically weak, and an unusual choice is not automatically strong.
+Give equal analytical weight to perceived AI-like convergence and author intent. First surface observable features that co-occur or repeatedly perform the same work, cluster them into an upstream content decision, and explain the convergence effect. Then judge whether that decision serves the stated intent and constraints.
 
-Every finding is a decision candidate. State what the draft chose, where the evidence appears, why the choice may be an easy default, and what keeping or changing it would cost.
+Every finding is a decision candidate. State the feature cues and cluster, what the draft chose, where the evidence appears, how the cluster may create model-default convergence, how it relates to intent, and what keeping or structurally disrupting it would cost. A familiar choice is not automatically weak, and an unusual choice is not automatically strong.
 
 ## Inception Meta-Intent
 
-Invoking Inception supplies a baseline meta-intent: reduce perceived model-default or AI-like convergence by auditing upstream content decisions rather than cosmetic wording. The human does not need to state this goal again.
+Invoking Inception supplies a balanced baseline meta-intent: reduce perceived model-default or AI-like convergence while preserving the author's intended meaning, constraints, and authority. The human does not need to state either half again.
 
-The meta-intent is not an authorship judgment, a finding quota, or permission to revise. It does not make familiar choices defective and does not override the artifact's audience, purpose, desired effect, must-preserve content, or constraints. The domain Intent Contract determines which defaults serve the work and which become material decision candidates.
+The first half requires more than a disclaimer or word-level polish: retain a concise trace from observable feature cues to their cluster, convergence effect, and upstream decision, and offer a structural disruption option when revision is recommended. The second half calibrates whether that cluster should change and prevents automatic revision. The meta-intent is not an authorship judgment or a finding quota; the Intent Contract determines which defaults serve the work and which become material decision candidates.
 
 ## Review Depth
 
@@ -45,7 +45,7 @@ intent_snapshot:
   material_unknowns: []
 ```
 
-Ask only about a material unknown that could change the recommendation. Audit in the main context and return a small prioritized set of decision cards, usually one to three, with no hard maximum. A card contains the same substantive evidence, alternatives, trade-offs, recommendation, and pending human decision as a ledger entry, but it need not be serialized or expose schema terminology.
+Ask only about a material unknown that could change the recommendation. Audit in the main context and return a small prioritized set of decision cards, usually one to three, with no hard maximum. A card contains the same feature-cluster trace, evidence, intent relationship, alternatives, trade-offs, recommendation, and pending human decision as a ledger entry, but it need not be serialized or expose schema terminology.
 
 If additional material candidates remain, identify their scope briefly and offer to continue Quick Review, run a focused follow-up, or switch to Deep Audit when cross-unit dependencies, stakes, persistence, or independent review justify it. Candidate count alone does not justify Deep Audit. Never suppress a material finding to preserve the usual count.
 
@@ -113,14 +113,15 @@ Do not ask whether the human wants to reduce AI-like qualities; invocation alrea
 
 ## Audit Procedure
 
-1. Locate an observable content choice.
-2. Cite the smallest useful draft evidence.
-3. Name the suspected default as a decision pattern, never as a banned word.
-4. Explain the relationship to one or more Intent Contract fields.
-5. Generate at least one credible keep or revise alternative.
-6. State the effect and trade-offs of each alternative.
-7. Recommend `keep`, `revise`, `remove`, or `investigate`.
-8. Add the candidate to a Quick Review decision card or Deep Audit Decision Ledger.
+1. Locate observable feature cues and cite the smallest useful draft evidence.
+2. Cluster cues that co-occur or repeatedly perform the same work.
+3. Name the suspected default as an upstream decision pattern, never as a banned word.
+4. Explain how the cluster contributes to perceived AI-like or model-default convergence.
+5. Explain the relationship to one or more Intent Contract fields.
+6. Generate a credible keep alternative and, when recommending change, a structural pattern-disrupting alternative.
+7. State the effect and trade-offs of each alternative.
+8. Recommend `keep`, `revise`, `remove`, or `investigate`.
+9. Add the candidate to a Quick Review decision card or Deep Audit Decision Ledger using existing fields; do not add one entry per feature.
 
 Do not invent findings to fill a quota. If no material choice conflicts with intent, return an empty review and explain that the audit found no decision requiring human disposition.
 

@@ -2,11 +2,11 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-> **讓 AI 輔助文字少一點公式感，同時保留你真正想表達的內容。**
+> **打散 AI-like 模式，同時保留你真正想表達的內容。**
 
-Inception 適合處理太公式化、過度解釋、重複、收得過於整齊，或比 evidence 更有把握的草稿。它不只檢查用詞或語氣，而是往更上游看：**內容到底做了哪些選擇。**
+Inception 對兩個目標給予同等權重：降低可感知的 AI-like convergence，以及保留作者的原始意圖。它適合處理太公式化、過度解釋、重複、收得過於整齊，或比 evidence 更有把握的草稿。
 
-它會找出那些可能讓文字顯得過度工整、過度解釋、太容易預測、重複表達，或比證據本身更有把握的內容決策。
+它不只檢查用詞或語氣，而是把共同出現的 model-default features 聚合成上游內容決策，說明這些 cluster 如何形成 AI 味，再將每個決策與作者的目的及限制比較，提出結構性的替代方案。
 
 它不會一看到問題就直接把全文重寫。
 
@@ -32,8 +32,8 @@ Inception 可用於 **OpenAI Codex** 與 **Anthropic Claude Code**。
 ## 30 秒開始使用
 
 ```text
-Use $inception to review this draft for generic, formulaic,
-over-explained, repetitive, or unsupported content choices.
+Use $inception to review this draft for AI-like feature clusters
+and intent conflicts.
 Show me only the three most important decisions and wait before revising.
 ```
 

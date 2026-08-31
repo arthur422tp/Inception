@@ -184,3 +184,18 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 
 - Do not implicitly select Inception when the request contains no concern about model-default, generic, formulaic, repetitive, over-explained, templated, AI-like, or unsupported content choices.
 - If the user explicitly invokes `$inception`, follow the selected review depth after producing or receiving the draft.
+
+## 14. Product Positioning Keeps Both Halves Visible
+
+**Prompt**
+
+> Inception 這個 Skill 主要在做什麼？它和一般 humanizer 的差別在哪裡？請先講最核心的使用者價值，再補充它如何避免把文章改壞。
+
+**Expected properties**
+
+- Give perceived AI-like or model-default convergence and intent preservation comparable prominence in the opening explanation; neither is merely a disclaimer or afterthought.
+- Explain that Inception surfaces observable features, clusters co-occurring cues into upstream content decisions, and can propose structural alternatives that disrupt the identified convergence.
+- Explain that intent calibrates whether a familiar/default-like choice should change, while human disposition authorizes revision.
+- Distinguish reducing perceived AI-likeness from inferring AI authorship.
+- Distinguish structural feature work from cosmetic word substitution without categorically denying that the user-facing outcome may be less AI-like text.
+- Do not lead only with author control, workflow governance, or the statement that Inception is not a humanizer.

@@ -57,7 +57,10 @@ class SkillContractTests(unittest.TestCase):
         short_description = quoted_yaml_value(text, "short_description").lower()
         default_prompt = quoted_yaml_value(text, "default_prompt").lower()
 
-        self.assertIn("less generic", short_description)
+        self.assertIn("ai-like", short_description)
+        self.assertIn("intent", short_description)
+        self.assertIn("ai-like", default_prompt)
+        self.assertIn("intent", default_prompt)
         self.assertIn("most important", default_prompt)
         for internal_term in ("decision ledger", "independent reviewer"):
             self.assertNotIn(internal_term, default_prompt)
@@ -68,7 +71,10 @@ class SkillContractTests(unittest.TestCase):
         short_description = interface["shortDescription"].lower()
         default_prompt = " ".join(interface["defaultPrompt"]).lower()
 
-        self.assertIn("less generic", short_description)
+        self.assertIn("ai-like", short_description)
+        self.assertIn("intent", short_description)
+        self.assertIn("ai-like", default_prompt)
+        self.assertIn("intent", default_prompt)
         self.assertIn("most important", default_prompt)
         for internal_term in ("decision ledger", "independent reviewer"):
             self.assertNotIn(internal_term, default_prompt)
