@@ -2,9 +2,9 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-> **一個在保留作者意圖的前提下，降低文字「AI 味」與模型預設感的 writing skill。**
+> **讓 AI 輔助文字少一點公式感，同時保留你真正想表達的內容。**
 
-Inception 不只檢查用詞或語氣，而是往更上游看：**內容到底做了哪些選擇。**
+Inception 適合處理太公式化、過度解釋、重複、收得過於整齊，或比 evidence 更有把握的草稿。它不只檢查用詞或語氣，而是往更上游看：**內容到底做了哪些選擇。**
 
 它會找出那些可能讓文字顯得過度工整、過度解釋、太容易預測、重複表達，或比證據本身更有把握的內容決策。
 
@@ -28,6 +28,38 @@ Inception 會先告訴你：
 * 品牌與個人的自然社群內容，包括貼文、caption、thread 與系列貼文。
 
 Inception 可用於 **OpenAI Codex** 與 **Anthropic Claude Code**。
+
+## 30 秒開始使用
+
+```text
+Use $inception to review this draft for generic, formulaic,
+over-explained, repetitive, or unsupported content choices.
+Show me only the three most important decisions and wait before revising.
+```
+
+Inception 預設使用 **Quick Review**：以自然語言提出經過排序、有證據的重要決策，通常為一至三個，但不設硬性上限。它不會強迫每一份短稿都進入完整審查流程，也不會為了維持預設數量而隱藏重要問題。
+
+例如：
+
+```text
+修改前
+「這次 migration 不只改善了流程，更徹底改變了我們理解協作的方式。
+以下是每個團隊都能使用的三個教訓……」
+
+Inception 注意到
+開頭 claim、三個教訓與結尾 takeaway 都把同一個事件收束成普遍結論，
+但草稿實際上只有一次 migration 的 evidence。
+
+人的決定
+保留事件；移除普遍性的 transformation claim，並合併重複的 lesson
+與 takeaway。
+
+修改後
+「這次 migration 比預期多花了兩天，因為我們從未在 partial failure
+下測試 rollback assumption……」
+```
+
+修改的是上游的內容決策，不只是替換同義詞；而且只有在人接受建議之後才會發生。
 
 ---
 
@@ -173,17 +205,28 @@ Inception 真正要問的是：
 
 ## 它怎麼運作？
 
-從使用者角度看，流程很簡單：
+大部分請求使用 **Quick Review**：
 
 ```text
-草稿
-  → Audit
-  → 你決定
-  → Revision
-  → Check
+草稿 → 經過排序的重要決策 → 你決定 → 修改 → 檢查
 ```
 
-Inception 會先確認：
+Quick Review 會從請求與草稿推斷最小必要 intent，只有缺少的答案會實質改變建議時才提問，並在主要對話裡完成 audit。它通常聚焦一至三個決策，但不設 finding 硬上限。
+
+當你明確要求 deep、full、exhaustive、independent 或 persisted review，或長篇／高風險內容需要檢查跨章節依賴時，使用 **Deep Audit**：
+
+```text
+完整 Intent Contract
+  → 可用時進行 independent audit
+  → Decision Ledger
+  → 你決定
+  → 經授權的修改
+  → Regression Audit
+```
+
+Finding 數量本身不會觸發 Deep Audit。如果仍有其他 material candidates，Inception 可以繼續 Quick Review、進行 focused follow-up，或只在依賴關係、風險、持久化或 independent review 確實需要時建議 Deep Audit。
+
+兩種深度都會先確認：
 
 > 這份文字到底想達成什麼？
 
@@ -198,7 +241,7 @@ Inception 會先確認：
 * 拒絕；
 * 延後處理。
 
-只有你接受或修改過的 decision，才能進入 revision。
+只有你接受或修改過的 decision，才能進入 revision。Quick Review 減少的是儀式與輸出負擔，不是這道 human-decision gate。
 
 修改完成後，Inception 會再檢查：
 
@@ -288,7 +331,7 @@ skills/inception/
 └── scripts/validate_ledger.py
 ```
 
-`SKILL.md` 會載入 Core workflow、Reviewer Protocol，以及**且僅載入一個** domain adapter。
+`SKILL.md` 會載入 Core workflow，以及**且僅載入一個** domain adapter。Deep Audit 會額外載入 Reviewer Protocol；deep fiction audit 也會載入完整 StoryScope feature registry。
 
 較詳細的 domain-specific guidance 則保留在 `references/` 中，避免與目前任務無關的 domain 文件佔用 context。
 

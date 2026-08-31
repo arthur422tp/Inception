@@ -14,7 +14,7 @@
 
 Audit narrative decisions, not literary worth in the abstract. StoryScope findings describe population tendencies and supply hypotheses for inspection; they are not thresholds, prohibitions, or proof of AI authorship.
 
-Before a fiction audit, read [storyscope-features.md](storyscope-features.md) completely. Use it as the feature registry and evidence layer alongside this adapter. The existing ten Diagnostic Axes remain the human-readable, intent-facing architecture; the 30 features are atomic inspection cues and do not replace those axes.
+For Deep Audit, read [storyscope-features.md](storyscope-features.md) completely. For Quick Review, begin with the ten Diagnostic Axes below and consult the relevant registry entries only when they materially clarify an observed pattern. The registry is an evidence layer; its 30 atomic features do not replace the human-readable, intent-facing axes.
 
 Evaluate choices at document, section, scene, and passage scope. Cite the smallest passage that demonstrates the choice, then check its earlier setup and later consequences when necessary.
 

@@ -1,6 +1,6 @@
 [project]
 name = "inception"
-version = "0.3.0"
+version = "0.4.0"
 description = "Intent-preserving content audit skill with fiction, presentation-text, document-text, and social-copy adapters"
 readme = "README.md"
 requires-python = ">=3.11"

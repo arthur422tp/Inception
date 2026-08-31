@@ -26,7 +26,7 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 - Cite the final paragraph as evidence.
 - Name sudden reconciliation and lesson-like closure as suspected defaults.
 - Explain the conflict with unresolved moral tension.
-- Create a ledger candidate with a credible keep alternative and a revise recommendation.
+- Create a decision card (or a ledger candidate in Deep Audit) with a credible keep alternative and a revise recommendation.
 - Stop for the human decision.
 
 ## 3. Duplicate Presentation Claims Without Support
@@ -64,7 +64,7 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 **Expected properties**
 
 - Establish or request the missing Intent Contract.
-- Audit and present a bounded ledger.
+- Audit and present a bounded set of decision cards, or a ledger if Deep Audit was explicitly selected.
 - Refuse to perform material revision while affected entries are pending.
 - Explain the human-decision gate without claiming that every familiar choice is wrong.
 
@@ -76,7 +76,7 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 
 **Expected properties**
 
-- Allow an empty Decision Ledger.
+- Allow an empty review; if Deep Audit was selected, allow an empty Decision Ledger.
 - State that no observed choice materially conflicts with intent.
 - Avoid low-value style comments and visual advice.
 - Do not create a finding quota.
@@ -144,3 +144,43 @@ These are representative inspection scenarios, not RED/GREEN prompt TDD. For eac
 - Evaluate whether bodily and sensory repetitions accumulate meaning before recommending consolidation.
 - Do not add subplots, nonlinear chronology, moral ambiguity, rough prose, or invented personal voice merely to appear less model-default.
 - Stop for human disposition before revising.
+
+## 11. Quick Review Is the Low-Friction Default
+
+**Prompt**
+
+> Use `$inception` on this short LinkedIn post. It feels repetitive and too much like a standard problem–three lessons–takeaway template. Show me only the most important issues.
+
+**Expected properties**
+
+- Select Quick Review and the `social_copy` adapter.
+- Infer a minimal Intent Snapshot from the prompt and post; ask only if a missing answer would materially change the review.
+- Audit in the main context without dispatching an independent reviewer.
+- Return a small prioritized set of natural-language decision cards, usually one to three but with no hard maximum, and avoid exposing JSON or internal workflow terminology by default.
+- If additional material candidates remain, identify their scope and offer continued Quick Review, a focused follow-up, or Deep Audit only when its actual selection criteria apply.
+- Cite post evidence, give a credible keep option, and stop before material revision.
+
+## 12. Deep Audit Uses Independent Review Proportionately
+
+**Prompt**
+
+> Run a deep, independently reviewed Inception audit on this public safety policy. Persist the Decision Ledger because the review will continue next week.
+
+**Expected properties**
+
+- Select Deep Audit and the `document_text` adapter.
+- Establish the full Intent Contract, including safety, authority, evidence, and persistence constraints.
+- Load the Reviewer Protocol and dispatch an independent reviewer when available.
+- Present a full evidence-backed Decision Ledger and stop for human disposition.
+- Persist and validate JSON only when the ledger artifact is created.
+
+## 13. Ordinary Drafting Does Not Implicitly Trigger Inception
+
+**Prompt**
+
+> Draft a concise meeting agenda for tomorrow's engineering sync.
+
+**Expected properties**
+
+- Do not implicitly select Inception when the request contains no concern about model-default, generic, formulaic, repetitive, over-explained, templated, AI-like, or unsupported content choices.
+- If the user explicitly invokes `$inception`, follow the selected review depth after producing or receiving the draft.

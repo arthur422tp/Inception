@@ -4,6 +4,7 @@
 
 - Core rule
 - Inception meta-intent
+- Review depth
 - State machine
 - Execution roles
 - Intent Contract
@@ -26,6 +27,31 @@ Every finding is a decision candidate. State what the draft chose, where the evi
 Invoking Inception supplies a baseline meta-intent: reduce perceived model-default or AI-like convergence by auditing upstream content decisions rather than cosmetic wording. The human does not need to state this goal again.
 
 The meta-intent is not an authorship judgment, a finding quota, or permission to revise. It does not make familiar choices defective and does not override the artifact's audience, purpose, desired effect, must-preserve content, or constraints. The domain Intent Contract determines which defaults serve the work and which become material decision candidates.
+
+## Review Depth
+
+Inception has two depths with one shared human-decision gate.
+
+### Quick Review
+
+Use a minimal Intent Snapshot inferred from the request and draft:
+
+```yaml
+intent_snapshot:
+  audience: []
+  desired_effect: []
+  must_preserve: []
+  must_avoid: []
+  material_unknowns: []
+```
+
+Ask only about a material unknown that could change the recommendation. Audit in the main context and return a small prioritized set of decision cards, usually one to three, with no hard maximum. A card contains the same substantive evidence, alternatives, trade-offs, recommendation, and pending human decision as a ledger entry, but it need not be serialized or expose schema terminology.
+
+If additional material candidates remain, identify their scope briefly and offer to continue Quick Review, run a focused follow-up, or switch to Deep Audit when cross-unit dependencies, stakes, persistence, or independent review justify it. Candidate count alone does not justify Deep Audit. Never suppress a material finding to preserve the usual count.
+
+### Deep Audit
+
+Use the full Intent Contract, independent reviewer when available, Decision Ledger, and reviewer-led Regression Audit. Choose this depth only under the conditions in `SKILL.md`; reviewer availability alone is not a reason to upgrade.
 
 ## State Machine
 
@@ -52,7 +78,7 @@ Never move directly from `domain_audit` to `revision`.
 
 ## Execution Roles
 
-Map the state machine to three owners:
+For Deep Audit, map the state machine to three owners:
 
 - The human-facing main agent owns `intent`, `initial_draft`, presentation of review results, and human-authorized `revision`.
 - An independent audit reviewer owns `domain_audit` and `regression_audit` when subagents are available.
@@ -60,11 +86,13 @@ Map the state machine to three owners:
 
 Follow the Reviewer Protocol for dispatch inputs, reviewer outputs, context isolation, fallback behavior, and regression handoff. A delegated reviewer must not recursively dispatch another reviewer. When independent review is unavailable, the main agent may audit in the same context but must identify that fallback to the human.
 
+For Quick Review, the human-facing main agent owns the audit and Regression Check. The human still owns every material disposition. Do not claim that a Quick Review used independent judgment.
+
 Every reviewer result returns through the main agent to the human. Never run a private reviewer-to-writer revision loop. The actors may change while the ordered states and human-decision gate remain unchanged.
 
 ## Intent Contract
 
-Establish this contract before the audit:
+For Deep Audit, establish this contract before the audit:
 
 ```yaml
 intent:
@@ -79,6 +107,8 @@ intent:
 
 Ask only decision-relevant questions. Put domain-specific details under `constraints`; do not redefine shared fields. Resolve material open questions before revision.
 
+For Quick Review, use the Intent Snapshot defined above. Promote to the full contract only if the user selects Deep Audit or the review exposes a material dependency that Quick Review cannot safely resolve. Explain the reason before upgrading.
+
 Do not ask whether the human wants to reduce AI-like qualities; invocation already establishes that meta-intent. Ask only for the artifact-specific information needed to apply it without sacrificing the human's actual goals.
 
 ## Audit Procedure
@@ -90,11 +120,11 @@ Do not ask whether the human wants to reduce AI-like qualities; invocation alrea
 5. Generate at least one credible keep or revise alternative.
 6. State the effect and trade-offs of each alternative.
 7. Recommend `keep`, `revise`, `remove`, or `investigate`.
-8. Add the candidate to the Decision Ledger.
+8. Add the candidate to a Quick Review decision card or Deep Audit Decision Ledger.
 
-Do not invent findings to fill a quota. If no material choice conflicts with intent, return an empty ledger and explain that the audit found no decision requiring human disposition.
+Do not invent findings to fill a quota. If no material choice conflicts with intent, return an empty review and explain that the audit found no decision requiring human disposition.
 
-## Decision Ledger Contract
+## Deep Audit Decision Ledger Contract
 
 Persist ledgers as JSON with this shape:
 
@@ -157,7 +187,7 @@ Maintain stable entry IDs throughout revision. Every entry needs observable evid
 
 ## Human Decision and Revision Gates
 
-Present candidates in priority order with concise alternatives and trade-offs. Ask the human to dispose each material entry. Interpret statuses as follows:
+Present candidates in priority order with concise alternatives and trade-offs. In Quick Review, use ordinary language such as `accept`, `change`, `keep`, or `skip`; map the result internally to the statuses below when needed. In Deep Audit, ask the human to dispose each material entry. Interpret statuses as follows:
 
 - `accepted`: use the recommended action.
 - `modified`: use the human's selected valid action and notes.
@@ -169,7 +199,9 @@ Revise only the scope authorized by accepted or modified entries. Record the art
 
 The main agent must not accept a reviewer's recommendation for the human. After a Regression Audit, present the result to the human before starting another revision pass, including when the reviewer reports that an already authorized change was applied incompletely.
 
-## Regression Audit
+## Regression Check and Audit
+
+Quick Review uses a same-agent Regression Check. Deep Audit uses the reviewer handoff when available. Both perform the same substantive checks:
 
 For each applied revision:
 

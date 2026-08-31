@@ -2,9 +2,9 @@
 
 [English](README.md) | [繁體中文](README.zh-TW.md)
 
-> **A writing skill that reduces “AI-like” or model-default patterns while preserving the author's intent.**
+> **Make AI-assisted writing less generic without losing what you meant.**
 
-Inception looks beyond word choice and tone. It asks a more upstream question: **what content choices did the draft make?**
+Inception is for drafts that feel formulaic, over-explained, repetitive, too neatly resolved, or more certain than their evidence. It looks beyond word choice and tone and asks a more upstream question: **what content choices did the draft make?**
 
 It looks for decisions that may make writing feel overly polished, over-explained, predictable, repetitive, or more certain than the evidence supports.
 
@@ -28,6 +28,39 @@ The first release supports:
 * organic brand and personal social copy, including captions, posts, threads, and post series.
 
 Inception works with **OpenAI Codex** and **Anthropic Claude Code**.
+
+## Try it in 30 seconds
+
+```text
+Use $inception to review this draft for generic, formulaic,
+over-explained, repetitive, or unsupported content choices.
+Show me only the three most important decisions and wait before revising.
+```
+
+Inception defaults to a **Quick Review**: a focused set of evidence-backed decisions in natural language, usually one to three but with no hard maximum. It does not force every draft through a formal audit or hide a material issue to preserve the usual count.
+
+For example:
+
+```text
+Before
+"The migration did more than improve our process. It transformed how
+we think about collaboration. Here are three lessons every team can use..."
+
+Inception notices
+The opening claim, three lessons, and closing takeaway all resolve the
+incident toward the same universal interpretation, while the draft
+contains evidence from only one migration.
+
+Human decision
+Keep the incident. Remove the universal transformation claim and merge
+the repeated lesson and takeaway.
+
+After
+"The migration took two days longer than planned because our rollback
+assumption had never been tested under partial failure..."
+```
+
+The revision changes the content decision—not merely the synonyms—and happens only after the human accepts it.
 
 ---
 
@@ -173,17 +206,28 @@ It treats these patterns as **decision candidates worth examining**.
 
 ## How does it work?
 
-From the user's perspective, the process is simple:
+Most requests use **Quick Review**:
 
 ```text
-Draft
-  → Audit
-  → You decide
-  → Revision
-  → Check
+Draft → prioritized material decisions → you decide → revision → check
 ```
 
-Inception first confirms:
+Quick Review infers a minimal intent snapshot from the request and draft, asks only when a missing answer could change the recommendation, and keeps the audit in the main conversation. It usually focuses on one to three decisions but has no hard finding cap.
+
+Use **Deep Audit** when you ask for a deep, full, exhaustive, independent, or persisted review, or when a long or high-stakes artifact makes cross-section dependencies central:
+
+```text
+Full Intent Contract
+  → independent audit when available
+  → Decision Ledger
+  → you decide
+  → authorized revision
+  → Regression Audit
+```
+
+Finding count alone does not trigger Deep Audit. If more material candidates remain, Inception can continue Quick Review, run a focused follow-up, or recommend Deep Audit when dependencies, stakes, persistence, or independent review actually justify it.
+
+Both depths first establish:
 
 > What is this piece of writing trying to achieve?
 
@@ -198,7 +242,7 @@ You can:
 * reject them;
 * defer them.
 
-Only decisions that you accept or modify can enter revision.
+Only decisions that you accept or modify can enter revision. Quick Review changes the amount of ceremony, not this human-decision gate.
 
 After the revision, Inception checks again:
 
@@ -288,7 +332,7 @@ skills/inception/
 └── scripts/validate_ledger.py
 ```
 
-`SKILL.md` loads the Core workflow, the Reviewer Protocol, and **exactly one** domain adapter.
+`SKILL.md` loads the Core workflow and **exactly one** domain adapter. Deep Audit additionally loads the Reviewer Protocol; a deep fiction audit also loads the complete StoryScope feature registry.
 
 More detailed domain-specific guidance remains in `references/`, so unrelated domain documents do not consume context for the current task.
 

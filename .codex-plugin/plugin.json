@@ -1,7 +1,7 @@
 {
   "name": "inception",
-  "version": "0.3.0",
-  "description": "Intent-preserving audit and revision for fiction, presentation text, document text, and organic social copy. Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
+  "version": "0.4.0",
+  "description": "Make AI-assisted fiction, presentations, documents, and organic social posts less generic, formulaic, repetitive, over-explained, or unsupported without losing the author's intent.",
   "author": {
     "name": "arthur422tp",
     "url": "https://github.com/arthur422tp"
@@ -19,8 +19,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Inception",
-    "shortDescription": "Audit content defaults against author intent",
-    "longDescription": "Intent-preserving audit and revision for fiction, presentation text, document text, and organic social copy. Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
+    "shortDescription": "Make AI-assisted writing less generic without losing intent",
+    "longDescription": "Find generic, formulaic, repetitive, over-explained, or unsupported content decisions in fiction, presentations, documents, and organic social posts. Preserve the author's intent and wait for human decisions before material revision.",
     "developerName": "arthur422tp",
     "category": "Writing",
     "capabilities": [
@@ -29,7 +29,7 @@
     ],
     "websiteURL": "https://github.com/arthur422tp/Inception",
     "defaultPrompt": [
-      "Audit this text against my intent and wait before revising."
+      "Review this draft for generic, formulaic, over-explained, repetitive, or unsupported content choices. Show me only the most important decisions and wait before revising."
     ]
   }
 }

@@ -1,5 +1,7 @@
 # Reviewer Protocol
 
+This protocol applies to Deep Audit. Quick Review stays in the human-facing main context and does not load or simulate this protocol.
+
 ## Core Rule
 
 Automate review dispatch, not content decisions. Keep the human-facing main agent responsible for intent, drafting, presentation, and approved revision. Give an independent reviewer responsibility for audit and regression findings. Keep the human responsible for every material disposition.
@@ -13,7 +15,7 @@ Never create an autonomous reviewer-to-writer revision loop.
 1. Establish the Intent Contract with the human.
 2. Obtain or create the initial draft.
 3. Select the domain adapter.
-4. Dispatch the audit when an independent subagent is available.
+4. Dispatch the audit when Deep Audit was selected and an independent subagent is available.
 5. Validate and present the review result without accepting entries for the human.
 6. Apply only human-accepted or human-modified actions.
 7. Present every Regression Audit result to the human before another revision pass.
@@ -62,7 +64,7 @@ These rules preserve the existing Audit Dispatch Contract, role permissions, sta
 
 ## Fallback
 
-When the current environment cannot create an independent subagent, keep the same state machine and perform the audit in the main context. Tell the human that independent review was unavailable. Do not claim role separation or fabricate reviewer output.
+When Deep Audit was selected but the current environment cannot create an independent subagent, keep the same state machine and perform the audit in the main context. Tell the human once that independent review was unavailable. Do not claim role separation or fabricate reviewer output.
 
 ## Regression Handoff
 

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "inception",
-  "version": "0.3.0",
-  "description": "Intent-preserving audit and revision for fiction, presentation text, document text, and organic social copy.",
+  "version": "0.4.0",
+  "description": "Make AI-assisted writing less generic, formulaic, repetitive, over-explained, or unsupported without losing the author's intent.",
   "owner": {
     "name": "arthur422tp",
     "url": "https://github.com/arthur422tp"
@@ -15,8 +15,8 @@
         "source": "github",
         "repo": "arthur422tp/Inception"
       },
-      "description": "Surfaces potentially default-driven content decisions, compares them against author intent, and returns material choices to the human.",
-      "version": "0.3.0",
+      "description": "Finds generic or model-default content choices, compares them with author intent, and waits for human decisions before material revision.",
+      "version": "0.4.0",
       "author": {
         "name": "arthur422tp",
         "url": "https://github.com/arthur422tp"
